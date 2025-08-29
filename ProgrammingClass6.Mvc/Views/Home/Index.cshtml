@@ -1,8 +1,71 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿<html>
+<head>
+    <title> Restaurant Alexander </title>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <link rel="stylesheet" href="./css/site.css" />
+</head>
+<body>    
+    <h1 style="text-align: center">
+        Welcome to Restaurant Alexander 
+    </h1>  
+    <img src="./images/restaurant.jpg" alt="The restaurant is pictured from the front" class="imige"/>
+    <div>
+        <h2>
+            Our Menu
+        </h2>        
+        <div>
+            <ul class="menu">
+                <li>
+                    <img src="./images/chongqing.jpg" />
+                    <a href="./hot-dishes.html">
+                        Hot dishes
+                    </a>
+                </li>
+                <li>
+                    <img src="./images/salads.jpg" class="top-image" />
+                    <a href="./salads.html">
+                        Salads
+                    </a>
+                </li>
+                <li>
+                    <img src="./images/NonAlcoholicDrinks.jpg" class="top-image" />
+                    <a href="./non-alcoholic-drinks.html">
+                        Non-alcoholic drinks
+                    </a>
+                </li>
+                <li>
+                    <img src="./images/AlcoholicDrinks.jpg" class="top-image" />
+                    <a href="./alcoholic-drinks.html">
+                        Alcoholic drinks
+                    </a>
+                </li>
+            </ul>
+        </div>       
+    </div>
+    <div>
+        <h2>
+            Offer of the day
+        </h2>
+        <div class="top-image">
+            
+            <img src="./images/burger.jpg" />
+            <p>
+                Burger + 0.5l coca cola + french fries 18$.
+            </p>               
+            <img src="./images/chiken-bucket.jpg" />
+            <p>
+                chiken-bucket + 0.5l coca cola + french fries 15$.
+            </p>                    
+            <img src="./images/vegan-salad.jpg" />
+            <p>
+                Spas + 0.5l coca cola + vegan-salad 17$.
+            </p>    
+        </div>        
+    </div>    
+    <p class="paragraf">
+        You can call for orders tel: +374 (00 000 000).<br>
+        For complaints and suggestions, you can call tel: +374 (00 000 000). Your opinion is important to us.<br>
+        Thank you for using our services.
+    </p>         
+</body>
+</html>
