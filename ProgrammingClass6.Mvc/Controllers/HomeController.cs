@@ -23,6 +23,23 @@ namespace ProgrammingClass6.Mvc.Controllers
             return View();
         }
 
+        public IActionResult Salads()
+        {
+            return View();
+        }
+        public IActionResult NonAlcoholicDrinks()
+        {
+            return View();
+        }
+        public IActionResult HotDishes()
+        {
+            return View();
+        }
+        public IActionResult AlcoholicDrinks()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
