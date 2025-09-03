@@ -20,3 +20,74 @@ html {
 body {
   margin-bottom: 60px;
 }
+h1 {
+    color: red;
+    text-align: center;
+    padding: 10px;
+    margin: 30px;
+}
+
+.darkorange-text {
+    color: darkorange;
+    padding: 22px;
+}
+
+.blue-text {
+    color: blue;
+    background-color: #41f1f1;
+    border-radius: 15px;
+    font-size: 18px;
+    display: inline;
+}
+
+.green-text {
+    background-color: greenyellow;
+    border-radius: 15px;
+}
+
+.green-fon {
+    background-color: #e2f7cc;
+}
+
+.navigation {
+    color: #df2e76;
+}
+
+    .navigation li {
+    }
+
+.padding {
+    padding-left: 366px;
+}
+
+.seafood-orenge {
+    color: #fba500;
+    background-color: #6388eb;
+    border-radius: 27px;
+    font-size: 23px;
+    display: inline;
+}
+
+.vegetables-green {
+    color: #cee70d;
+    background-color: #1dc506;
+    border-radius: 12px;
+    font-size: 23px;
+    display: inline;
+    padding: 5px;
+}
+
+.drink-red {
+    color: #f9f9f9;
+    background-color: #910707;
+    border-radius: 12px;
+    font-size: 30px;
+    display: inline;
+}
+.color-backround {
+    background-color: blanchedalmond;
+}
+
+
+
+
