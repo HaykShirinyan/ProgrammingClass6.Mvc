@@ -14,7 +14,7 @@
 </head>
 <body class="green-fon">
     <div>
-        <h1 class="green-text">
+        <h1>
             WELCOME  URENI  RESTAURANT
         </h1>
         <p class="padding">
@@ -35,7 +35,7 @@
         <ol class="navigation">
             <li>
 
-                <a href="./Drink.cshtml" target="_blank">
+                <a asp-controller="Home" asp-action="Drink" target="_blank">
                     <p class="blue-text">
                         Alcohal Drinks
                     </p>
@@ -43,7 +43,7 @@
             </li>
 
             <li>
-                <a href="seafood.html" target="_blank">
+                <a asp-controller="Home" asp-action="seafood" target="_blank">
                     <p class="blue-text">
                         Seafood
                     </p>
@@ -51,7 +51,7 @@
             </li>
 
             <li>
-                <a href="food-vegetables.html" target="_blank">
+                <a asp-controller="Home" asp-action="Foodvegetables" target="_blank">
                     <p class="blue-text">
                         Vegetables
                     </p>

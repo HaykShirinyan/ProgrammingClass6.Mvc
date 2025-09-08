@@ -38,7 +38,7 @@ namespace ProgrammingClass6.Mvc.Controllers
             return View();
         }
 
-        public IActionResult FoodVegetables() 
+        public IActionResult FoodVegetables()
         {
             return View();
         }

@@ -40,10 +40,6 @@ h1 {
     display: inline;
 }
 
-.green-text {
-    background-color: greenyellow;
-    border-radius: 15px;
-}
 
 .green-fon {
     background-color: #e2f7cc;
@@ -52,8 +48,6 @@ h1 {
 .navigation {
     color: #df2e76;
 }
-
-    }
 
 .padding {
     padding-left: 366px;
@@ -86,7 +80,27 @@ h1 {
 .color-backround {
     background-color: blanchedalmond;
 }
-
+.food-text {
+    color: green;
+}
+.food-text-h3 {
+    color: black;
+    font-weight: bold;
+}
+.seafood-text {
+    color: #698ee3;
+}
+.drink-text {
+    color: #9b0000;
+    background-color: #e3c5c5;
+    display: inline;
+    border-radius: 7px;
+    margin:-57px
+}
+.drink-text-h3 {
+    color: white;
+    font-weight: bold;
+}
 
 
 
