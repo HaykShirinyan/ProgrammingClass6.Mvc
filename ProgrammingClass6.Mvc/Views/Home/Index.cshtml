@@ -1,8 +1,109 @@
-﻿@{
+﻿<!-- @{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+</div> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gericht - Home</title>
+  <link rel="stylesheet" href="./css/styles.css">
+  <link rel="stylesheet" href="./css/home.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <header class="app__header">
+    <div class="app__logo">
+      GERICHT
+    </div>
+    <nav>
+      <ul class="app__navbar-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="#">Awards</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="app__navbar-login">
+      <a href="#">Log In / Registration</a>
+      <div></div>
+      <a href="#">Book Table</a>
+    </div>
+  </header>
+
+  <section class="app__header-hero section-padding">
+    <div class="app__header-hero_content">
+      <p class="p__cormorant" style="color: var(--color-golden);">Chase The New Flavour</p>
+      <img src="https://raw.githubusercontent.com/adrianhajdin/project_modern_ui_ux_restaurant/main/src/assets/spoon.svg" alt="spoon" class="spoon__img">
+      <h1 class="headtext__cormorant">The Key To Fine Dining</h1>
+      <p class="p__opensans">Sit Tellus Lobortis Sed Senectus Vivamus Molestie. Condimentum Volutpat Morbi Facilisis Quam Scelerisque Sapien. Et, Penatibus Aliquam Amet Tellus</p>
+      <button type="button" class="custom__button">Explore Menu</button>
+    </div>
+    <div class="app__header-hero_image">
+      <img src="https://raw.githubusercontent.com/adrianhajdin/project_modern_ui_ux_restaurant/main/src/assets/welcome.png" alt="header img">
+    </div>
+  </section>
+
+  <section class="app__chef section-padding">
+    <div class="app__chef-content">
+      <img src="https://raw.githubusercontent.com/adrianhajdin/project_modern_ui_ux_restaurant/main/src/assets/chef.png" alt="chef">
+      <div class="app__chef-content_quote">
+        <img src="https://raw.githubusercontent.com/adrianhajdin/project_modern_ui_ux_restaurant/main/src/assets/quote.png" alt="quote">
+        <p class="p__opensans">Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit Auctor Sit .</p>
+        <p class="p__opensans">Auctor Sit Iaculis In Arcu. Vulputate Nulla Lobortis Mauris Eget Sit. Nulla Scelerisque Scelerisque Con gue Ac Consequat, Aliquam Molestie Lectus Eu. Congue Iaculis Integer Curabitur Semper Sit Nunc.</p>
+        <h4 class="p__cormorant">Kevin Luo</h4>
+        <p class="p__opensans">Chef & Founder</p>
+        <img src="https://raw.githubusercontent.com/adrianhajdin/project_modern_ui_ux_restaurant/main/src/assets/sign.png" alt="sign">
+      </div>
+    </div>
+  </section>
+
+  <footer class="app__footer">
+    <div class="app__newsletter">
+      <p class="p__cormorant">Newsletter</p>
+      <img src="https://raw.githubusercontent.com/adrianhajdin/project_modern_ui_ux_restaurant/main/src/assets/spoon.svg" alt="spoon">
+      <h1 class="headtext__cormorant">Subscribe to Our Newsletter</h1>
+      <p class="p__opensans">And never miss latest Updates!</p>
+      <div class="app__newsletter-input">
+        <input type="email" placeholder="Enter your email address">
+        <button type="button" class="custom__button">Subscribe</button>
+      </div>
+    </div>
+    <div class="app__footer-links">
+      <div class="app__footer-links_contact">
+        <h1 class="app__footer-headtext">Contact Us</h1>
+        <p class="p__opensans">9 W 53Rd St, New York, NY 10019, USA</p>
+        <p class="p__opensans">+1 212-344-1230</p>
+        <p class="p__opensans">+1 212-555-1230</p>
+      </div>
+      <div class="app__footer-links_logo">
+        <h1 class="app__footer-headtext">GERICHT</h1>
+        <p class="p__opensans">"The best way to find yourself is to lose yourself in the service of others.”</p>
+        <img src="https://raw.githubusercontent.com/adrianhajdin/project_modern_ui_ux_restaurant/main/src/assets/spoon.svg" alt="spoon" style="margin-top: 1rem;">
+        <div class="app__footer-links_icons">
+          <i class="fa-brands fa-facebook-f"></i>
+          <i class="fa-brands fa-twitter"></i>
+          <i class="fa-brands fa-instagram"></i>
+        </div>
+      </div>
+      <div class="app__footer-links_work">
+        <h1 class="app__footer-headtext">Working Hours</h1>
+        <p class="p__opensans">Monday-Friday:</p>
+        <p class="p__opensans">08:00 Am -12:00 Am</p>
+        <p class="p__opensans">Saturday-Sunday:</p>
+        <p class="p__opensans">07:00Am -11:00 Pm</p>
+      </div>
+    </div>
+    <div class="footer__copyright">
+      <p class="p__opensans">2025 Gericht. All Rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
