@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-ProgrammingClass6.Mvc-2c4790b7-cf65-4eaf-9043-21f3886af3e9</UserSecretsId>
   </PropertyGroup>
