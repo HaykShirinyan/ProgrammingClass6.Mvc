@@ -6,6 +6,10 @@ namespace ProgrammingClass6.Mvc.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
+        public DbSet<UnitOfMeasure> UnitOfMeasures { get; set; }
+
+        public DbSet<ProductType> ProductTypes {  get; set; }     
+
         public DbSet<Product> Products { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
