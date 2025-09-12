@@ -1,0 +1,15 @@
+﻿wwwroot / images / salad.jpg
+wwwroot / images / soup.jpg
+wwwroot / images / bruschetta.jpg
+wwwroot / images / chicken.jpg
+wwwroot / images / steak.jpg
+wwwroot / images / pasta.jpg
+wwwroot / images / pizza.jpg
+wwwroot / images / cake.jpg
+wwwroot / images / icecream.jpg
+wwwroot / images / cheesecake.jpg
+wwwroot / images / specialwater.jpg
+wwwroot / images / tea.jpg
+wwwroot / images / coffee.jpg
+wwwroot / images / cola.jpg
+wwwroot / images / background.jpg
