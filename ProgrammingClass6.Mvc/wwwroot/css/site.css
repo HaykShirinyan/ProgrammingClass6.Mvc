@@ -20,3 +20,22 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+body {
+    margin: 0;
+    padding: 24px;
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+}
+
+h1 {
+    margin: 0 0 16px;
+}
+
+h2 {
+    margin-top: 24px;
+}
+
+ul {
+    padding-left: 20px;
+}
