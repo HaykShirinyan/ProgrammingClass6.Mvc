@@ -9,14 +9,13 @@ namespace ProgrammingClass6.Mvc.Models
 
         [Required]
         [StringLength(100)]
-        public string Title { get; set; }
+        public required string Title { get; set; }
 
-        public string Brand { get; set; }
+        public required string Brand { get; set; }
 
-        public string Type { get; set; }
+        public required string Type { get; set; }
 
         public decimal Price { get; set; }
 
-        public int battary { get; set; }
     }
 }

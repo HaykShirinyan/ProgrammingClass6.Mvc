@@ -14,6 +14,7 @@ namespace ProgrammingClass6.Mvc.Controllers
         public IActionResult Index()
         {
             List<ProductType> productTypes = _context.ProductTypes.ToList();
+         
             return View(productTypes);
         }
     }
