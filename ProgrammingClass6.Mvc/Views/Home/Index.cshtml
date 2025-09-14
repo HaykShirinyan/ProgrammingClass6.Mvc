@@ -2,7 +2,47 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<html>
+<head>
+    <title>Italian restaurant</title>
+    <style>
+        div {
+            border: 2px solid #964407;
+            background-color: rgba(0, 0, 0);
+            display: flex;
+            gap: 50px;
+            justify-content: center
+        }
+
+        body {
+            background-image: url(restaurant-interior.jpg);
+            background-size: cover;
+            background-position: center;
+        }
+
+        h1 {
+            color: burlywood;
+        }
+
+        .text {
+            color: burlywood
+        }
+    </style>
+</head>
+<body>
+    <div id="1">
+        <h1>Main page</h1>
+        <a href="./menu.cshtml"><h1>Menu</h1></a>
+        <a href="./about.cshtml"><h1>About us</h1></a>
+    </div>
+    <div class="text" style="
+    margin: 21 0;
+    padding: 0 21;
+">
+        <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam varius tempor sem, vel blandit mauris.</h2><br>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dolor mi, accumsan eget tortor eu, ullamcorper vulputate nisi. Phasellus venenatis justo eu lacus molestie, sit amet porttitor massa fermentum. Quisque tempor vitae mi non scelerisque.</p>
+
+    </div>
+    <a src="./interior.png"></a>
+</body>
+</html>

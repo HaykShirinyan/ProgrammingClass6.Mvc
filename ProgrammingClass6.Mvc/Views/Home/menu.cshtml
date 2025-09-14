@@ -1,0 +1,119 @@
+﻿@page
+@model ProgrammingClass6.Mvc.Views.Home.menuModel
+@{
+}
+
+<html>
+<head>
+    <title>Italian restaurant</title>
+    <style>
+        div.top {
+            border: 2px solid #964407;
+            background-color: rgba(0, 0, 0);
+            display: flex;
+            gap: 50px;
+            justify-content: center;
+        }
+
+        body {
+            background-image: url(restaurant-interior.jpg);
+            background-size: cover;
+            background-position: center;
+        }
+
+        h1 {
+            color: burlywood;
+        }
+
+        .menu {
+            margin: 15px auto;
+            padding: 15px;
+            width: 500px;
+            height: 800px;
+            background-color: wheat;
+            display: block;
+            border: 2px solid #9a8263;
+            color: #9a8500;
+            font-size: 30px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="top">
+        <a href="./Index.cshtml"><h1>Main page</h1></a>
+        <h1>Menu</h1>
+        <a href="./about.cshtml"><h1>About us</h1></a>
+    </div>
+    <div class="container">
+        <div class="menu">
+            <p style="
+    font-size: 80;
+    padding: 0 0 0 0;
+    text-align: center;
+    margin: 0 0 0 0;
+    font-family: fantasy;
+">Menu</p>
+            <ol style="font-size: 30;font-family: sans-serif;">
+                <li>
+                    Pizzas:
+                    <ul>
+                        <li>Mocarella</li>
+                        <li>Peperoni</li>
+                        <li>4 cheese</li>
+
+                    </ul>
+                </li>
+
+                <li>
+                    Salads:
+                    <ul>
+                        <li>Caezar</li>
+                        <li>Classic</li>
+                        <li>Sea Salad</li>
+                    </ul>
+                </li>
+
+                <li>
+                    Non Alc. Drinks:
+                    <ul>
+                        <li>
+                            Pepsi
+                        </li>
+                        <li>
+                            Cola
+                        </li>
+                        <li>
+                            Water
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    Alc. Drinks:
+                    <ul>
+                        <li>
+                            Beer
+                        </li>
+                        <li>
+                            Vodka
+                        </li>
+                        <li>
+                            Tequila
+                        </li>
+                    </ul>
+                </li>
+
+            </ol>
+        </div>
+    </div>
+
+
+
+
+</body>
+</html>
