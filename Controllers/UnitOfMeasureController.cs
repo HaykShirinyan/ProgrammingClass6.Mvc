@@ -15,5 +15,9 @@ namespace ProgrammingClass6.Mvc.Controllers
 
             return View(unitOfMeasures);
         }
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }

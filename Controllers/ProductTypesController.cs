@@ -17,5 +17,6 @@ namespace ProgrammingClass6.Mvc.Controllers
          
             return View(productTypes);
         }
+             
     }
 }

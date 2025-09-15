@@ -5,7 +5,7 @@
 namespace ProgrammingClass6.Mvc.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class UnitOfMeasures : Migration
+    public partial class UnitOfMeasure : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
