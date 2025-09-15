@@ -12,7 +12,7 @@ using ProgrammingClass6.Mvc.Data;
 namespace ProgrammingClass6.Mvc.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250913170340_UnitOfMeasures")]
+    [Migration("20250915183649_UnitOfMeasures")]
     partial class UnitOfMeasures
     {
         /// <inheritdoc />
