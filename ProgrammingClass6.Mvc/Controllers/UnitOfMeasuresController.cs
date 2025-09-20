@@ -14,81 +14,54 @@ namespace ProgrammingClass6.Mvc.Controllers
             _dbContext = dbContext;
         }
 
-        // GET: UnitOfMeasuresController
-        public ActionResult Index()
+        [HttpGet]
+        public IActionResult Index()
         {
             List<UnitOfMeasure> unitOfMeasures = _dbContext.UnitOfMeasures.ToList();
 
             return View(unitOfMeasures);
         }
 
-        // GET: UnitOfMeasuresController/Details/5
-        public ActionResult Details(int id)
+        [HttpGet]
+        public IActionResult Create()
         {
             return View();
         }
 
-        // GET: UnitOfMeasuresController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: UnitOfMeasuresController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public IActionResult Create(UnitOfMeasure unitOfMeasure)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+                _dbContext.UnitOfMeasures.Add(unitOfMeasure);
+                _dbContext.SaveChanges();
 
-        // GET: UnitOfMeasuresController/Edit/5
-        public ActionResult Edit(int id)
-        {
+                return RedirectToAction("Index");
+            }
+
             return View();
         }
 
-        // POST: UnitOfMeasuresController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        [HttpGet]
+        public IActionResult Edit(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            var unitOfMeasure = _dbContext.UnitOfMeasures.SingleOrDefault(p => p.Id == id);
+
+            return View(unitOfMeasure);
         }
 
-        // GET: UnitOfMeasuresController/Delete/5
-        public ActionResult Delete(int id)
+        [HttpPost]
+        public IActionResult Edit(UnitOfMeasure unitOfMeasure)
         {
+            if (ModelState.IsValid)
+            {
+                _dbContext.UnitOfMeasures.Update(unitOfMeasure);
+                _dbContext.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
             return View();
-        }
-
-        // POST: UnitOfMeasuresController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }

@@ -1,0 +1,34 @@
+﻿@model UnitOfMeasure
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<form asp-controller="UnitOfMeasures" asp-action="Edit">
+    <div class="mb-3">
+        <label asp-for="Id" class="form-label">
+            Id
+        </label>
+        <input asp-for="Id" class="form-control" readonly/>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Unit" class="form-label">
+            Unit
+        </label>
+        <input asp-for="Unit" class="form-control" />
+        <span asp-validation-for="Unit" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <a class="btn btn-secondary" asp-controller="UnitOfMeasures" asp-action="Index">
+            Cancel
+        </a>
+        <button type="submit" class="btn btn-primary">
+            Save
+        </button>
+    </div>
+
+</form>

@@ -13,81 +13,54 @@ namespace ProgrammingClass6.Mvc.Controllers
         {
             _dbContext = dbContext;
         }
-        // GET: ProductTypesControllers
-        public ActionResult Index()
+        [HttpGet]
+        public IActionResult Index()
         {
             List<ProductType> productTypes = _dbContext.ProductTypes.ToList();
 
             return View(productTypes);
         }
 
-        // GET: ProductTypesControllers/Details/5
-        public ActionResult Details(int id)
+        [HttpGet]
+        public IActionResult Create()
         {
             return View();
         }
 
-        // GET: ProductTypesControllers/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: ProductTypesControllers/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public IActionResult Create(ProductType productType)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+                _dbContext.ProductTypes.Add(productType);
+                _dbContext.SaveChanges();
 
-        // GET: ProductTypesControllers/Edit/5
-        public ActionResult Edit(int id)
-        {
+                return RedirectToAction("Index");
+            }
+
             return View();
         }
 
-        // POST: ProductTypesControllers/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        [HttpGet]
+        public IActionResult Edit(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            var productType = _dbContext.ProductTypes.SingleOrDefault(p => p.Id == id);
+
+            return View(productType);
         }
 
-        // GET: ProductTypesControllers/Delete/5
-        public ActionResult Delete(int id)
+        [HttpPost]
+        public IActionResult Edit(ProductType productType)
         {
+            if (ModelState.IsValid)
+            {
+                _dbContext.ProductTypes.Update(productType);
+                _dbContext.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
             return View();
-        }
-
-        // POST: ProductTypesControllers/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }
