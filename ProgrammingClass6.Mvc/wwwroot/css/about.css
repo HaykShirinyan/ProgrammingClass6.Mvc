@@ -1,0 +1,52 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    color: #333;
+    text-align: center;
+}
+
+.lahmajo-image {
+    width: 300px;
+    margin-top: 20px;
+}
+
+.section-title {
+    font-size: 36px;
+    color: rebeccapurple;
+    margin-bottom: 20px;
+}
+
+#coral-color {
+    color: coral;
+    font-size: 20px;
+}
+
+#gray-color {
+    color: gray;
+    font-size: 36px;
+}
+
+.similar-text {
+    color: rebeccapurple;
+    font-size: 46px;
+    justify-content: center;
+}
+
+.menu {
+    background-color: #f0f0f0;
+    padding: 30px;
+    border-radius: 50px;
+    display: inline-block;
+}
+
+    .menu li {
+        font-size: 18px;
+        padding: 10px;
+        list-style: none;
+    }
+
+
+.contact-info {
+    font-size: 18px;
+    line-height: 1.6;
+}
