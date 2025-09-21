@@ -8,6 +8,8 @@ namespace ProgrammingClass6.Mvc.Data
     {
         public DbSet<Product> Products { get; set; }
 
+        public DbSet<Manufacturer> Manufacturers { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
