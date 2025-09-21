@@ -3,7 +3,7 @@ using Microsoft.Identity.Client;
 using ProgrammingClass6.Mvc.Data;
 using ProgrammingClass6.Mvc.Models;
 using System.Collections.Generic;
-using ProductType = ProgrammingClass6.Mvc.Models.ProductType;
+
 namespace ProgrammingClass6.Mvc.Controllers
 {
     public class ProductTypesController : Controller
