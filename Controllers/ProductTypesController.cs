@@ -8,16 +8,16 @@ namespace ProgrammingClass6.Mvc.Controllers
 {
     public class ProductTypesController : Controller
     {
-        private ApplicationDbContext _context;
+        private ApplicationDbContext _dbcontext;
         public ProductTypesController(ApplicationDbContext context)
         {
-            _context = context;
+            _dbcontext = context;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
-            List<ProductType> productTypes = _context.ProductTypes.ToList();
+            List<ProductType> productTypes = _dbcontext.ProductTypes.ToList();
          
             return View(productTypes);
         }
@@ -34,8 +34,8 @@ namespace ProgrammingClass6.Mvc.Controllers
         { 
         if (ModelState.IsValid)
             {
-                _context.ProductTypes.Add(productType);
-                _context.SaveChanges();
+                _dbcontext.ProductTypes.Add(productType);
+                _dbcontext.SaveChanges();
 
                 return RedirectToAction("Index");
             }
@@ -45,7 +45,7 @@ namespace ProgrammingClass6.Mvc.Controllers
         [HttpGet]
         public IActionResult Edit1(int id)
         {
-            var productType = _context
+            var productType = _dbcontext
             .ProductTypes.SingleOrDefault(pt => pt.Id == id);
 
             return View(productType);
@@ -56,8 +56,8 @@ namespace ProgrammingClass6.Mvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.ProductTypes.Update(productType);
-                _context.SaveChanges();
+                _dbcontext.ProductTypes.Update(productType);
+                _dbcontext.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(productType);

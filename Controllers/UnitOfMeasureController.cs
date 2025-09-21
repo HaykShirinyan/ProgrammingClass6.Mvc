@@ -7,17 +7,16 @@ namespace ProgrammingClass6.Mvc.Controllers
 {
     public class UnitOfMeasureController : Controller
     {
-        private ApplicationDbContext _context;
-        private readonly object _dbContext;
+        private ApplicationDbContext _dbcontext;
 
         public UnitOfMeasureController(ApplicationDbContext context)
         {
-            _context = context;
+            _dbcontext = context;
         }
         [HttpGet]
         public IActionResult Index()
         {
-            List<Models.UnitOfMeasure> unitOfMeasures = _context.UnitOfMeasures.ToList();
+            List<Models.UnitOfMeasure> unitOfMeasures = _dbcontext.UnitOfMeasures.ToList();
 
             return View(unitOfMeasures);
         }
@@ -33,8 +32,8 @@ namespace ProgrammingClass6.Mvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.UnitOfMeasures.Add(unitOfMeasure);
-                _context.SaveChanges();
+                _dbcontext.UnitOfMeasures.Add(unitOfMeasure);
+                _dbcontext.SaveChanges();
 
                 return RedirectToAction("Index");
             }
@@ -44,7 +43,7 @@ namespace ProgrammingClass6.Mvc.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var unitOfMeasure = _context
+            var unitOfMeasure = _dbcontext
                 .UnitOfMeasures.SingleOrDefault(pt => pt.Id == id);
 
             return View(unitOfMeasure);
@@ -54,8 +53,8 @@ namespace ProgrammingClass6.Mvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.UnitOfMeasures.Update(unitOfMeasure);
-                _context.SaveChanges();
+                _dbcontext.UnitOfMeasures.Update(unitOfMeasure);
+                _dbcontext.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(unitOfMeasure);
