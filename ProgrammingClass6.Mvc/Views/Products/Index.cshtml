@@ -30,6 +30,9 @@
                     Quantity
                 </th>
                 <th>
+                    Manufacturer
+                </th>
+                <th>
                     Actions
                 </th>
             </tr>
@@ -53,6 +56,9 @@
                     </td>
                     <td>
                         @product.Quantity
+                    </td>
+                    <td>
+                        @product.Manufacturer?.Name
                     </td>
                     <td>
                         <a class="btn btn-secondary" 
