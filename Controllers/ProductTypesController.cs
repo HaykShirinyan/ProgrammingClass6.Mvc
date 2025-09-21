@@ -3,7 +3,6 @@ using Microsoft.Identity.Client;
 using ProgrammingClass6.Mvc.Data;
 using ProgrammingClass6.Mvc.Models;
 using System.Collections.Generic;
-using ProgrammingClass6.Mvc.Migrations;
 using ProductType = ProgrammingClass6.Mvc.Models.ProductType;
 namespace ProgrammingClass6.Mvc.Controllers
 {
@@ -30,7 +29,8 @@ namespace ProgrammingClass6.Mvc.Controllers
         }
 
         [HttpPost]
-        public IActionResult Creat(ProductType productType)
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(ProductType productType)
         { 
         if (ModelState.IsValid)
             {
@@ -40,26 +40,27 @@ namespace ProgrammingClass6.Mvc.Controllers
                 return RedirectToAction("Index");
             }
             return View();
+        }
 
-            [HttpGet]
-            Public IActionResult Edit(int id)
-            {
-                var productType = _context
-                    .ProductTypes.SingleOrDefault(pt => pt.Id == id);
-                return View(productType);
-            }
+        [HttpGet]
+        public IActionResult Edit1(int id)
+        {
+            var productType = _context
+            .ProductTypes.SingleOrDefault(pt => pt.Id == id);
 
-            [HttpPost]
-            Public IActionResult Edit(ProductType productType)
+            return View(productType);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(ProductType productType)
+        {
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    _context.ProductTypes.Update(productType);
-                    _context.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-                return View(productType);
+                _context.ProductTypes.Update(productType);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
             }
+            return View(productType);
         }
 
     }

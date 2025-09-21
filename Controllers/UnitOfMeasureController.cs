@@ -28,6 +28,7 @@ namespace ProgrammingClass6.Mvc.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Creat(UnitOfMeasure unitOfMeasure)
         {
             if (ModelState.IsValid)
