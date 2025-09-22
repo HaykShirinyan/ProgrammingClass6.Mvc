@@ -29,7 +29,6 @@ namespace ProgrammingClass6.Mvc.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Create(ProductType productType)
         { 
         if (ModelState.IsValid)
@@ -43,10 +42,11 @@ namespace ProgrammingClass6.Mvc.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit1(int id)
+        public IActionResult Edit(int id)
         {
             var productType = _dbcontext
-            .ProductTypes.SingleOrDefault(pt => pt.Id == id);
+            .ProductTypes
+            .SingleOrDefault(pt => pt.Id == id);
 
             return View(productType);
         }
