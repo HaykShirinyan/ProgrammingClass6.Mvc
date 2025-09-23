@@ -42,7 +42,7 @@
                         @productType.Id
                     </td>
                     <td>
-                        @productType.Title
+                        @productType.Name
                     </td>
                     <td>
                         @productType.Brand
@@ -52,6 +52,9 @@
                     </td>
                     <td>
                         @productType.Price
+                    </td>
+                    <td>
+                        @productType.Quantity
                     </td>
                     <td>
                         <a class="btn btn-secondary" asp-controller="ProductTypes" asp-action="Edit" asp-route-id="@productType.Id">

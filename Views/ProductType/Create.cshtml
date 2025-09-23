@@ -12,11 +12,11 @@
 
 <form asp-controller="ProductTypes" asp-action="Create">
     <div class="mb-3">
-        <label asp-for="Title" class="form-label">
+        <label asp-for="Name" class="form-label">
             Title
         </label>
-        <input asp-for="Title" class="form-control" />
-        <span asp-validation-for="Title" class="text-danger"></span>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
     </div>
     <div class="mb-3">
         <label asp-for="Brand" class="form-label">
@@ -39,6 +39,14 @@
         </lable>
         <input asp-for="Price" class="form-control" />
         <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Quantity" class="col-form-label">
+            Quantity
+        </label>
+        <input asp-for="Quantity" class="form-control" />
+        <span asp-validation-for="Quantity" class="text-danger"></span>
     </div>
     <div>
         <a class="btn btn-secondary" asp-controller="ProductTypes" asp-action="Index">
