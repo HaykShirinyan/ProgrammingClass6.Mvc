@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProgrammingClass6.Mvc.Data;
 
@@ -11,9 +12,11 @@ using ProgrammingClass6.Mvc.Data;
 namespace ProgrammingClass6.Mvc.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250923165256_Manufacturers")]
+    partial class Manufacturers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -244,7 +247,7 @@ namespace ProgrammingClass6.Mvc.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Manufactures", (string)null);
+                    b.ToTable("Manufactures");
                 });
 
             modelBuilder.Entity("ProgrammingClass6.Mvc.Models.ProductType", b =>
@@ -277,7 +280,7 @@ namespace ProgrammingClass6.Mvc.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductTypes", (string)null);
+                    b.ToTable("ProductTypes");
                 });
 
             modelBuilder.Entity("ProgrammingClass6.Mvc.Models.UnitOfMeasure", b =>
@@ -308,7 +311,7 @@ namespace ProgrammingClass6.Mvc.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UnitOfMeasures", (string)null);
+                    b.ToTable("UnitOfMeasures");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

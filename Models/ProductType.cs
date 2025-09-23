@@ -1,5 +1,7 @@
 ﻿
+using ProgrammingClass6.Mvc.Data.Migrations;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace ProgrammingClass6.Mvc.Models
 {
     public class ProductType
@@ -18,6 +20,10 @@ namespace ProgrammingClass6.Mvc.Models
         public decimal Price { get; set; }
 
         public decimal Quantity { get; set; }
+        [ForeignKey(nameof(ProductType))]
+        public int? MaufacturerId { get; set; }
+
+        public required Manufacturers Manufacturers { get; set; }
 
     }
 }
