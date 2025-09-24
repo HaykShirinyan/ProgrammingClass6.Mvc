@@ -18,6 +18,7 @@ namespace ProgrammingClass6.Mvc.Models
         public decimal Price { get; set; }
 
         public decimal Quantity{ get; set; }
+
         [ForeignKey(nameof(UnitOfMeasure))]
         public int? ManufactureId { get; set; }
 

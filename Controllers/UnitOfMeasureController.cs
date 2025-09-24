@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProgrammingClass6.Mvc.Data;
-using ProgrammingClass6.Mvc.Data.Migrations;
 using ProgrammingClass6.Mvc.Models;
-using UnitOfMeasure = ProgrammingClass6.Mvc.Models.UnitOfMeasure;
 namespace ProgrammingClass6.Mvc.Controllers
 {
     public class UnitOfMeasureController : Controller
@@ -16,7 +14,7 @@ namespace ProgrammingClass6.Mvc.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            List<Models.UnitOfMeasure> unitOfMeasures = _dbcontext.UnitOfMeasures.ToList();
+            List<UnitOfMeasure> unitOfMeasures = _dbcontext.UnitOfMeasures.ToList();
 
             return View(unitOfMeasures);
         }
@@ -27,8 +25,7 @@ namespace ProgrammingClass6.Mvc.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Creat(UnitOfMeasure unitOfMeasure)
+         public IActionResult Create(UnitOfMeasure unitOfMeasure)
         {
             if (ModelState.IsValid)
             {
@@ -44,7 +41,8 @@ namespace ProgrammingClass6.Mvc.Controllers
         public IActionResult Edit(int id)
         {
             var unitOfMeasure = _dbcontext
-                .UnitOfMeasures.SingleOrDefault(pt => pt.Id == id);
+                .UnitOfMeasures
+                .SingleOrDefault(pt => pt.Id == id);
 
             return View(unitOfMeasure);
         }

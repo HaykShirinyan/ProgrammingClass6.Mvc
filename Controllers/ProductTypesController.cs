@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Identity.Client;
 using ProgrammingClass6.Mvc.Data;
 using ProgrammingClass6.Mvc.Models;
-using System.Collections.Generic;
+
+
 
 namespace ProgrammingClass6.Mvc.Controllers
 {
     public class ProductTypesController : Controller
     {
-        private ApplicationDbContext _dbcontext;
+        private  ApplicationDbContext _dbcontext;
         public ProductTypesController(ApplicationDbContext context)
         {
             _dbcontext = context;

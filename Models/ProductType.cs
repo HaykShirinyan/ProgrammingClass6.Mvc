@@ -20,10 +20,11 @@ namespace ProgrammingClass6.Mvc.Models
         public decimal Price { get; set; }
 
         public decimal Quantity { get; set; }
-        [ForeignKey(nameof(ProductType))]
-        public int? MaufacturerId { get; set; }
 
-        public required Manufacturers Manufacturers { get; set; }
+        [ForeignKey(nameof(ProductType))]
+        public int? MaufactureId { get; set; }
+
+        public required Manufacture Manufacture { get; set; }
 
     }
 }

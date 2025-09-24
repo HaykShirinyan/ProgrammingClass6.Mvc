@@ -10,13 +10,13 @@
    
 </h1>
 
- <form asp-controller="UnitOfMeasure" asp-action="Creat">
+ <form asp-controller="UnitOfMeasure" asp-action="Create">
      <div class="mb-3">
          <label asp-for="Name" class="form-label"> 
               Name
          </label>
         <input asp-for="Name" class="form-control"/>
-
+        <span asp-validation-for="Name" class="text-danger"></span>
      </div>
      <div class="mb-3">
          <label asp-for="Type" class="form-label">
@@ -24,7 +24,7 @@
          </label>
          <textarea asp-for="Type" class="form-control">
          </textarea>
-
+        <span asp-validation-for="Type" class="text-danger"></span>
      </div>
 
      <div class="mb-3">
@@ -32,7 +32,7 @@
              UnitOfMeasureValu
          </label>
          <input asp-for="UnitOfMeasureValue" class="form-control" />
-
+        <span asp-validation-for="UnitOfMeasureValue" class="text-danger"></span>
      </div>
 
      <div class="mb-3">
@@ -40,7 +40,7 @@
              Price
          </lable>
          <input asp-for="Price" class="form-control" />
-
+        <span asp-validation-for="Price" class="text-danger"></span>
      </div>
 
      <div class="mb-3">
@@ -48,7 +48,7 @@
          Quantity
          </label>
          <input asp-for="Quantity" class="form-control" />
-
+        <span asp-validation-for="Quantity" class="text-danger"></span>
      </div>
 
      <div>
