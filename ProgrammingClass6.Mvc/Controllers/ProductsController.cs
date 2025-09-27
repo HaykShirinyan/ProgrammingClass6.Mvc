@@ -21,6 +21,8 @@ namespace ProgrammingClass6.Mvc.Controllers
             List<Product> products = _dbContext
                 .Products
                 .Include(product => product.Manufacturer)
+                .Include(product => product.UnitOfMeasure)
+                .Include(product => product.ProductType)
                 .ToList();
 
             return View(products);
@@ -30,6 +32,11 @@ namespace ProgrammingClass6.Mvc.Controllers
         public IActionResult Create()
         {
             ViewBag.Manufacturers = _dbContext.Manufacturers.ToList();
+
+            ViewBag.UnitOfMeasures = _dbContext.UnitOfMeasures.ToList();
+
+            ViewBag.ProductTypes = _dbContext.ProductTypes.ToList();
+
             return View();
         }
 
@@ -46,6 +53,10 @@ namespace ProgrammingClass6.Mvc.Controllers
 
             ViewBag.Manufacturers = _dbContext.Manufacturers.ToList();
 
+            ViewBag.UnitOfMeasures = _dbContext.UnitOfMeasures.ToList();
+
+            ViewBag.ProductTypes = _dbContext.ProductTypes.ToList();
+
             return View();
         }
 
@@ -58,6 +69,10 @@ namespace ProgrammingClass6.Mvc.Controllers
                 .SingleOrDefault(dbProductRow => dbProductRow.Id == id);
 
             ViewBag.Manufacturers = _dbContext.Manufacturers.ToList();
+
+            ViewBag.UnitOfMeasures =_dbContext.UnitOfMeasures.ToList();
+
+            ViewBag.ProductTypes = _dbContext.ProductTypes.ToList();
 
             return View(product);
         }
@@ -74,6 +89,10 @@ namespace ProgrammingClass6.Mvc.Controllers
             }
 
             ViewBag.Manufacturers = _dbContext.Manufacturers.ToList();
+
+            ViewBag.UnitOfMeasures = _dbContext.UnitOfMeasures.ToList();
+
+            ViewBag.ProductTypes = _dbContext.ProductTypes.ToList();
 
             return View(product);
         }
