@@ -7,46 +7,60 @@
 @{
 }
 
+<a class="btn btn-primary" mb-3 
+    asp-controller="UnitOfMeasures" 
+    asp-action="Create">
+    Add New
+</a>
+
 <div>
-    <table class="table"
+    <table class="table">
         <thead>
-            <tr
+            <tr>
                 <th>
                         ID
                 </th>
                 <th>
                         UnitName
-                </th
+                </th>
                 <th>
                         UnitShortName
                 </th>
                 <th>
                         Diametere
                  </th>
-
+                <th>
+                    Actions
+                </th>
             </tr>
         </thead>
 
         <tbody>
             @foreach (UnitOfMeasure unitOfMeasure in Model)
             {
-                    <tr>
-                        <td>
-                            @unitOfMeasure.Id
-                        </td>
-                        <td>
-                            @unitOfMeasure.UnitName
-                        </td>
-                        <td>
-                            @unitOfMeasure.UnitShortName
-                        </td>
-                        <td>
-                            @unitOfMeasure.Diametere
-                        </td>
-                    </tr>
+            <tr>
+                <td>
+                    @unitOfMeasure.Id
+                </td>
+                <td>
+                    @unitOfMeasure.UnitName
+                </td>
+                <td>
+                    @unitOfMeasure.UnitShortName
+                </td>
+                <td>
+                    @unitOfMeasure.Diametere
+                </td>
+                <td>
+                        <a class="btn btn-secondary"
+                           asp-controller="UnitOfMeasures"
+                           asp-action="Edit"
+                           asp-route-Id="@unitOfMeasure.Id">
+                            Edit
+                        </a>
+                </td>
+            </tr>
             }
-)
         </tbody>
-
     </table>
 </div>

@@ -8,17 +8,22 @@
 @{
 }
 
+<a class="btn btn-primary" mb-3 
+    asp-controller="ProductTypes"
+    asp-action="Create">
+    Add New
+</a>
 
 <div>
     <table class="table"
         <thead>
-            <tr
+            <tr>
                 <th>
                         ID
                 </th>
                 <th>
                         Name 
-                </th
+                </th>
                 <th>
                         Description
                 </th>
@@ -27,6 +32,9 @@
                  </th>
                  <th>
                        Quantity
+                 </th>
+                 <th>
+                       Actions
                  </th>
             </tr>
         </thead>
@@ -50,9 +58,17 @@
                     <td>
                         @productType.Quantity
                     </td>
+                    <td>
+                        <a class="btn btn-secondary" 
+                            asp-controller="ProductTypes" 
+                            asp-action="Edit" 
+                            asp-route-Id="@productType.Id">
+                            Edit
+                        </a>
+                    </td>
                 </tr>
             }
-)
+
         </tbody>
 
     </table>
