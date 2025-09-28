@@ -62,6 +62,12 @@
         </select>
     </div>
 
+    <div class="my-3">
+        <a asp-controller="ProductCategories" asp-action="Index" asp-route-productId="@Model.Id">
+            Categories
+        </a>
+    </div>
+
     <div>
         <a class="btn btn-secondary" asp-controller="Products" asp-action="Index">
             Cancel
