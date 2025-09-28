@@ -5,12 +5,12 @@ namespace ProgrammingClass6.Mvc.Models
 {
     public class UnitOfMeasure
     {
-        [key]   
+        [Key]
         public int Id { get; set; }
         [Required]
         [StringLength(150)]
         public required string Name { get; set; }
-        [SrtingLenght(500)] 
+        [StringLength(500)]
         public required string Type { get; set; }
 
         public decimal UnitOfMeasureValue { get; set; }

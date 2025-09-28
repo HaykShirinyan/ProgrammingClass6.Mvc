@@ -29,6 +29,9 @@
                    Price
                </th>
                <th>
+                   Manufacturer
+               </th>
+               <th>
                     Actions
                </th>
            </tr>
@@ -54,6 +57,10 @@
                      </td>
                      <td>
                          @unitOfMeasure.Quantity
+                     </td>
+                     <td>
+
+                        @unitOfMeasure.Manufacture?.Name
                      </td>
                      <td>
                         <a class="btn btn-secondary" asp-controller="UnitOfMeasure" asp-action="Edit" asp-route-id="@unitOfMeasure.Id">

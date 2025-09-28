@@ -55,6 +55,23 @@
         <span asp-validation-for="Quantity" class="text-danger"></span>
 
     </div>
+    <div class="mb-3">
+        <label asp-for="ManufactureId"
+               class="form-label">
+            Manufacturer
+        </label>
+        <select asp-for="ManufactureId" class="form-control">
+            <option>
+
+            </option>
+            @foreach (Manufacture manufacturer in ViewBag.Manufactures)
+            {
+                <option value="@manufacturer.Id">
+                    @manufacturer.Name
+                </option>
+            }
+        </select>
+    </div>
 
     <div>
         <a class="btn btn-secondary" asp-controller="UnitOfMeasure" asp-action="Index">

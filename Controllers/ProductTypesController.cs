@@ -2,22 +2,20 @@
 using ProgrammingClass6.Mvc.Data;
 using ProgrammingClass6.Mvc.Models;
 
-
-
 namespace ProgrammingClass6.Mvc.Controllers
 {
     public class ProductTypesController : Controller
     {
-        private  ApplicationDbContext _dbcontext;
-        public ProductTypesController(ApplicationDbContext context)
+        private ApplicationDbContext _dbcontext;
+        public ProductTypesController(ApplicationDbContext dbcontext)
         {
-            _dbcontext = context;
+            _dbcontext = dbcontext;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
-            List<ProductType> productTypes = _dbcontext.ProductTypes.ToList();
+            List<ProductType> productTypes = [.. _dbcontext.ProductTypes];
          
             return View(productTypes);
         }

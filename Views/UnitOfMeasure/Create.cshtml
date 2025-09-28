@@ -36,9 +36,9 @@
      </div>
 
      <div class="mb-3">
-         <lable asp-for="Price" class="for-lable">
+         <label asp-for="Price" class="form-lable">
              Price
-         </lable>
+          </label>
          <input asp-for="Price" class="form-control" />
         <span asp-validation-for="Price" class="text-danger"></span>
      </div>
@@ -51,12 +51,30 @@
         <span asp-validation-for="Quantity" class="text-danger"></span>
      </div>
 
+     <div class="mb-3">
+         <label asp-for="ManufactureId"
+                class="form-label">
+            Manufacturer
+         </label>
+         <select asp-for="ManufactureId" class="form-control">
+             <option>
+
+             </option>
+             @foreach (Manufacture manufacturer in ViewBag.Manufactures)
+             {
+                 <option value="@manufacturer.Id">
+                     @manufacturer.Name
+                 </option>
+            }
+         </select>
+     </div>
+
      <div>
          <a class="btn btn-secondary" asp-controller="UnitOfMeasure" asp-action="Index">
              Cancel
          </a>
          <button class="btn btn-primary" type="submit">
-             Save
+            Save
          </button>
      </div>
  </form>

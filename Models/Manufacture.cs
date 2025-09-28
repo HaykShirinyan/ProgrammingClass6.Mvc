@@ -4,7 +4,7 @@ namespace ProgrammingClass6.Mvc.Models
 {
     public class Manufacture
     {
-        [key]
+        [Key]
         public int Id { get; set; }
         [Required]
         [StringLength(150)]
