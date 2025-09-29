@@ -21,8 +21,8 @@ namespace ProgrammingClass6.Mvc.Models
 
         public decimal Quantity { get; set; }
 
-        [ForeignKey(nameof(ProductType))]
-        public int? MaufactureId { get; set; }
+        [ForeignKey(nameof(Manufacture))]
+        public int? ManufactureId { get; set; }
 
         public required Manufacture Manufacture { get; set; }
 

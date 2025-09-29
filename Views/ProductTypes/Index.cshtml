@@ -28,9 +28,16 @@
                 <th>
                     Price
                 </th>
+                <td>
+                    Quantity
+                </td>
+                <th>
+                    Manufacturer
+                </th>
                 <th>
                     Actions
                 </th>
+               
             </tr>
         </thead>
 
@@ -55,6 +62,9 @@
                     </td>
                     <td>
                         @productType.Quantity
+                    </td>
+                    <td>
+                        @productType.Manufacture?.Name
                     </td>
                     <td>
                         <a class="btn btn-secondary" asp-controller="ProductTypes" asp-action="Edit" asp-route-id="@productType.Id">

@@ -29,6 +29,7 @@ namespace ProgrammingClass6.Mvc.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            ViewBag.Manufactures = _dbcontext.Manufactures.ToList();
             return View();
         }
 
