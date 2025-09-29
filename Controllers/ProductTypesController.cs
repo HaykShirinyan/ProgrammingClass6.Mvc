@@ -5,9 +5,15 @@ using ProgrammingClass6.Mvc.Models;
 
 namespace ProgrammingClass6.Mvc.Controllers
 {
-    public class ProductTypesController(ApplicationDbContext dbcontext) : Controller
+    public class ProductTypesController : Controller
     {
-        private readonly ApplicationDbContext _dbcontext = dbcontext;
+        private ApplicationDbContext _dbcontext;
+    
+        public ProductTypesController(ApplicationDbContext dbcontext)
+        {
+            _dbcontext = dbcontext;
+        }
+        
 
         [HttpGet]
         public IActionResult Index()

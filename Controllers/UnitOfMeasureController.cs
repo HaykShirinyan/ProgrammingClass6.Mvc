@@ -4,9 +4,14 @@ using ProgrammingClass6.Mvc.Data;
 using ProgrammingClass6.Mvc.Models;
 namespace ProgrammingClass6.Mvc.Controllers
 {
-    public class UnitOfMeasureController(ApplicationDbContext dbContext) : Controller
+    public class UnitOfMeasureController : Controller
+    
     {
-        private readonly ApplicationDbContext _DbContext = dbContext;
+        private ApplicationDbContext _DbContext;
+        public UnitOfMeasureController(ApplicationDbContext dbContext)
+        {
+            _DbContext = dbContext;
+        }
 
         [HttpGet]
         public IActionResult Index()
