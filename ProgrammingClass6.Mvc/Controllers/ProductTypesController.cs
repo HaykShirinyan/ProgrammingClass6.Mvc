@@ -5,11 +5,11 @@ using ProgrammingClass6.Mvc.Models;
 
 namespace ProgrammingClass6.Mvc.Controllers
 {
-    public class ProductTypesControllers : Controller
+    public class ProductTypesController : Controller
     {
         private ApplicationDbContext _dbContext;
 
-        public ProductTypesControllers(ApplicationDbContext dbContext)
+        public ProductTypesController(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }

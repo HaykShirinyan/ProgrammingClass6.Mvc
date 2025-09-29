@@ -24,11 +24,11 @@ namespace ProgrammingClass6.Mvc.Models
         public Manufacturer Manufacturer { get; set; }
 
         [ForeignKey(nameof(UnitOfMeasure))]
-        public int? UnitOfMeasureID { get; set; }
+        public int? UnitOfMeasureId { get; set; }
         public UnitOfMeasure UnitOfMeasure { get; set; }
 
-        [ForeignKey(nameof(ProductType))]
-        public int? ProductTypeID { get; set; }
-        public ProductType ProductType { get; set; }
+        //[ForeignKey(nameof(ProductType))]
+        //public int? ProductTypeId { get; set; }
+        //public ProductType ProductType { get; set; }
     }
 }

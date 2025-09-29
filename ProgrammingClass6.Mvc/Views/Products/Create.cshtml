@@ -60,10 +60,10 @@
     </div>
 
     <div class="mb-3">
-        <label asp-for="UnitOfMeasureID" class="form-label">
+        <label asp-for="UnitOfMeasureId" class="form-label">
             Unit
         </label>
-        <select asp-for="UnitOfMeasureID" class="form-control">
+        <select asp-for="UnitOfMeasureId" class="form-control">
             <option></option>
 
             @foreach (UnitOfMeasure unitOfMeasure in ViewBag.UnitOfMeasures)
@@ -75,11 +75,11 @@
         </select>
     </div>
     
-    <div class="mb-3">
-        <label asp-for="ProductTypeID" class="form-label">
+    <!-- <div class="mb-3">
+        <label asp-for="ProductTypeId" class="form-label">
             Name
         </label>
-        <select asp-for="ProductTypeID" class="form-control">
+        <select asp-for="ProductTypeId" class="form-control">
             <option></option>
 
             @foreach (ProductType productType in ViewBag.ProductTypes)
@@ -89,7 +89,7 @@
                 </option>
             }
         </select>
-    </div>
+    </div> -->
 
     <div>
         <a class="btn btn-secondary" asp-controller="Products" asp-action="Index">

@@ -243,7 +243,7 @@ namespace ProgrammingClass6.Mvc.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Manufacturers");
+                    b.ToTable("Manufacturers", (string)null);
                 });
 
             modelBuilder.Entity("ProgrammingClass6.Mvc.Models.Product", b =>
@@ -281,7 +281,7 @@ namespace ProgrammingClass6.Mvc.Data.Migrations
 
                     b.HasIndex("UnitOfMeasureID");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("ProgrammingClass6.Mvc.Models.ProductType", b =>
@@ -299,7 +299,7 @@ namespace ProgrammingClass6.Mvc.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProductTypes");
+                    b.ToTable("ProductTypes", (string)null);
                 });
 
             modelBuilder.Entity("ProgrammingClass6.Mvc.Models.UnitOfMeasure", b =>
@@ -317,7 +317,7 @@ namespace ProgrammingClass6.Mvc.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UnitOfMeasures");
+                    b.ToTable("UnitOfMeasures", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
