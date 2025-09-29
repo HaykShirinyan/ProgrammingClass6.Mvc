@@ -1,22 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProgrammingClass6.Mvc.Data;
 using ProgrammingClass6.Mvc.Models;
 
 namespace ProgrammingClass6.Mvc.Controllers
 {
-    public class ProductTypesController : Controller
+    public class ProductTypesController(ApplicationDbContext dbcontext) : Controller
     {
-        private ApplicationDbContext _dbcontext;
-        public ProductTypesController(ApplicationDbContext dbcontext)
-        {
-            _dbcontext = dbcontext;
-        }
+        private readonly ApplicationDbContext _dbcontext = dbcontext;
 
         [HttpGet]
         public IActionResult Index()
         {
-            List<ProductType> productTypes = [.. _dbcontext.ProductTypes];
-         
+            var productTypes = _dbcontext
+                .ProductTypes
+                .Include(ProductType => ProductType.Manufacture)
+                .ToList();
+
             return View(productTypes);
         }
 
@@ -27,11 +27,11 @@ namespace ProgrammingClass6.Mvc.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(ProductType productType)
-        { 
-        if (ModelState.IsValid)
+        public IActionResult Create(ProductType productTypes)
+        {
+            if (ModelState.IsValid)
             {
-                _dbcontext.ProductTypes.Add(productType);
+                _dbcontext.ProductTypes.Add(productTypes);
                 _dbcontext.SaveChanges();
 
                 return RedirectToAction("Index");
@@ -43,23 +43,22 @@ namespace ProgrammingClass6.Mvc.Controllers
         public IActionResult Edit(int id)
         {
             var productType = _dbcontext
-            .ProductTypes
-            .SingleOrDefault(pt => pt.Id == id);
+                .ProductTypes
+                .SingleOrDefault(pt => pt.Id == id);
 
             return View(productType);
         }
 
         [HttpPost]
-        public IActionResult Edit(ProductType productType)
+        public IActionResult Edit(ProductType productTypes)
         {
             if (ModelState.IsValid)
             {
-                _dbcontext.ProductTypes.Update(productType);
+                _dbcontext.ProductTypes.Update(productTypes);
                 _dbcontext.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(productType);
+            return View(productTypes);
         }
-
     }
 }

@@ -4,18 +4,14 @@ using ProgrammingClass6.Mvc.Data;
 using ProgrammingClass6.Mvc.Models;
 namespace ProgrammingClass6.Mvc.Controllers
 {
-    public class UnitOfMeasureController : Controller
+    public class UnitOfMeasureController(ApplicationDbContext dbContext) : Controller
     {
-        private ApplicationDbContext _dbContext;
+        private readonly ApplicationDbContext _DbContext = dbContext;
 
-        public UnitOfMeasureController(ApplicationDbContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
         [HttpGet]
         public IActionResult Index()
         {
-            List<UnitOfMeasure> unitOfMeasures = _dbContext
+            var unitOfMeasures = _DbContext
                 .UnitOfMeasures
                 .Include(UnitOfMeasure => UnitOfMeasure.Manufacture)
                 .ToList();
@@ -25,7 +21,7 @@ namespace ProgrammingClass6.Mvc.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Manufactures = _dbContext.Manufactures.ToList();
+            ViewBag.Manufactures = _DbContext.Manufactures.ToList();
             return View();
         }
         [HttpPost]
@@ -33,21 +29,21 @@ namespace ProgrammingClass6.Mvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                _dbContext.UnitOfMeasures.Add(unitOfMeasure);
-                _dbContext.SaveChanges();
+                _DbContext.UnitOfMeasures.Add(unitOfMeasure);
+                _DbContext.SaveChanges();
 
                 return RedirectToAction("Index");
             }
-            ViewBag.Manufactures = _dbContext.Manufactures.ToList();
+            ViewBag.Manufactures = _DbContext.Manufactures.ToList();
             return View();
         }
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var unitOfMeasure = _dbContext
+            var unitOfMeasure = _DbContext
                 .UnitOfMeasures
                 .SingleOrDefault(pt => pt.Id == id);
-            ViewBag.Manufactures = _dbContext.Manufactures.ToList();
+            ViewBag.Manufactures = _DbContext.Manufactures.ToList();
 
             return View(unitOfMeasure);
         }
@@ -56,12 +52,12 @@ namespace ProgrammingClass6.Mvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                _dbContext.UnitOfMeasures.Update(unitOfMeasure);
-                _dbContext.SaveChanges();
+                _DbContext.UnitOfMeasures.Update(unitOfMeasure);
+                _DbContext.SaveChanges();
 
                 return RedirectToAction("Index");
             }
-            ViewBag.Manufactures = _dbContext.Manufactures.ToList();
+            ViewBag.Manufactures = _DbContext.Manufactures.ToList();
             return View(unitOfMeasure);
         }
     }
