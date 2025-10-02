@@ -27,7 +27,7 @@
         <span asp-validation-for="Brand" class="text-danger"></span>
     </div>
     <div class="mb-3">
-        <label asp-for="Type" class="form-lable">
+        <label asp-for="Type" class="form-label">
             Type
         </label>
         <input asp-for="Type" class="form-control" />
@@ -49,16 +49,16 @@
         <span asp-validation-for="Quantity" class="text-danger"></span>
     </div>
     <div>
-        <label asp-for="ManufactureId"
-               class="form-label">
+        <label asp-for="ManufactureId" class="form-label">
             Manufacturer
         </label>
+
         <select asp-for="ManufactureId" class="form-control">
             <option></option>
-            @foreach (var manufacturer in ViewBag.Manufacturers)
+            @foreach (var manufacture in ViewBag.Manufactures)
             {
-                <option value="@manufacturer.Id">
-                    @manufacturer.Name
+                <option value="@manufacture.Id">
+                    @manufacture.Name
                 </option>
             }
 

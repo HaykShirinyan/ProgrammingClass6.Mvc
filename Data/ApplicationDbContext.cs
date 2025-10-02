@@ -6,6 +6,7 @@ namespace ProgrammingClass6.Mvc.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
+        
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -16,5 +17,15 @@ namespace ProgrammingClass6.Mvc.Data
         public DbSet<UnitOfMeasure> UnitOfMeasures { get; set; }
 
         public DbSet<Manufacture> Manufactures { get; set; }
+
+        public DbSet<ProductTypeSize> ProductTypeSizes { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<ProductTypeSize>()
+                .HasKey(pts => new { pts.ProductTypeId, pts.SizeId });
+            
+        }
     }
 }

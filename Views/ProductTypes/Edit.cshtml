@@ -8,8 +8,8 @@
 
 <form asp-controller="ProductTypes" asp-action="Edit">
 
-    <div class="mb">
-        <label asp-for="Id" class="form-lable">
+    <div class="mb-3">
+        <label asp-for="Id" class="form-label">
             Id
         </label>
         <input asp-for="Id" class="form-control" readonly />
@@ -30,22 +30,22 @@
         <span asp-validation-for="Brand" class="text-danger"></span>
     </div>
     <div class="mb-3">
-        <label asp-for="Type" class="form-lable">
+        <label asp-for="Type" class="form-label">
             Type
         </label>
         <input asp-for="Type" class="form-control" />
         <span asp-validation-for="Type" class="text-danger"></span>
     </div>
     <div class="mb-3">
-        <lable asp-for="Price" class="form-lable">
+        <label asp-for="Price" class="form-label">
             Price
-        </lable>
+        </label>
         <input asp-for="Price" class="form-control" />
         <span asp-validation-for="Price" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
-        <label asp-for="Quantity" class="form-lable">
+        <label asp-for="Quantity" class="form-label">
             Quantity
         </label>
         <input asp-for="Quantity" class="form-control" />
@@ -58,16 +58,20 @@
             Manufacturer
         </label>
         <select asp-for="ManufactureId" class="form-control">
-            <option>
-
-            </option>
-            @foreach (Manufacture manufacturer in ViewBag.Manufactures)
+            <option></option>
+            @foreach (var manufacture in ViewBag.Manufactures)
             {
-                <option value="@manufacturer.Id">
-                    @manufacturer.Name
+                <option value="@manufacture.Id">
+                    @manufacture.Name
                 </option>
             }
         </select>
+    </div>
+    <div class="my-3">
+        <a asp-controller="ProductTypeSize" asp-action="Index" asp-route-producttypeId="@Model.Id">
+             Sizes
+        </a>
+
     </div>
 
     <div>

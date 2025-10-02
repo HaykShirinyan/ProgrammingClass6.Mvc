@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProgrammingClass6.Mvc.Data;
 
@@ -11,9 +12,11 @@ using ProgrammingClass6.Mvc.Data;
 namespace ProgrammingClass6.Mvc.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250930093821_Sizes")]
+    partial class Sizes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -285,21 +288,6 @@ namespace ProgrammingClass6.Mvc.Data.Migrations
                     b.ToTable("ProductTypes");
                 });
 
-            modelBuilder.Entity("ProgrammingClass6.Mvc.Models.ProductTypeSize", b =>
-                {
-                    b.Property<int>("ProductTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SizeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductTypeId", "SizeId");
-
-                    b.HasIndex("SizeId");
-
-                    b.ToTable("ProductTypeSizes");
-                });
-
             modelBuilder.Entity("ProgrammingClass6.Mvc.Models.Size", b =>
                 {
                     b.Property<int>("Id")
@@ -320,7 +308,7 @@ namespace ProgrammingClass6.Mvc.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Size");
+                    b.ToTable("Sizes");
                 });
 
             modelBuilder.Entity("ProgrammingClass6.Mvc.Models.UnitOfMeasure", b =>
@@ -418,25 +406,6 @@ namespace ProgrammingClass6.Mvc.Data.Migrations
                         .HasForeignKey("ManufactureId");
 
                     b.Navigation("Manufacture");
-                });
-
-            modelBuilder.Entity("ProgrammingClass6.Mvc.Models.ProductTypeSize", b =>
-                {
-                    b.HasOne("ProgrammingClass6.Mvc.Models.ProductType", "ProductType")
-                        .WithMany()
-                        .HasForeignKey("ProductTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProgrammingClass6.Mvc.Models.Size", "Size")
-                        .WithMany()
-                        .HasForeignKey("SizeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ProductType");
-
-                    b.Navigation("Size");
                 });
 
             modelBuilder.Entity("ProgrammingClass6.Mvc.Models.UnitOfMeasure", b =>

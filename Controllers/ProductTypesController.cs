@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProgrammingClass6.Mvc.Data;
 using ProgrammingClass6.Mvc.Models;
@@ -7,20 +8,19 @@ namespace ProgrammingClass6.Mvc.Controllers
 {
     public class ProductTypesController : Controller
     {
-        private ApplicationDbContext _dbcontext;
-    
+        private readonly ApplicationDbContext _dbcontext;
+
         public ProductTypesController(ApplicationDbContext dbcontext)
         {
             _dbcontext = dbcontext;
         }
-        
 
         [HttpGet]
         public IActionResult Index()
         {
             var productTypes = _dbcontext
                 .ProductTypes
-                .Include(ProductType => ProductType.Manufacture)
+                .Include(pt => pt.Manufacture)
                 .ToList();
 
             return View(productTypes);
@@ -29,43 +29,53 @@ namespace ProgrammingClass6.Mvc.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Manufactures = _dbcontext.Manufactures.ToList();
+            ViewBag.Manufactures = new SelectList(_dbcontext.Manufactures, "Id", "Name");
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(ProductType productTypes)
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(ProductType productType)
         {
             if (ModelState.IsValid)
             {
-                _dbcontext.ProductTypes.Add(productTypes);
+                _dbcontext.ProductTypes.Add(productType);
                 _dbcontext.SaveChanges();
-
                 return RedirectToAction("Index");
             }
-            return View();
-        }
 
+            ViewBag.Manufactures = new SelectList(_dbcontext.Manufactures, "Id", "Name");
+            return View(productType);
+        }
+               
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var productType = _dbcontext
-                .ProductTypes
+            var productType = _dbcontext.ProductTypes
                 .SingleOrDefault(pt => pt.Id == id);
+
+            if (productType == null)
+                return NotFound();
+
+            ViewBag.Manufactures = new SelectList(_dbcontext.Manufactures, "Id", "Name", productType.ManufactureId);
 
             return View(productType);
         }
-
+               
         [HttpPost]
-        public IActionResult Edit(ProductType productTypes)
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(ProductType productType)
         {
             if (ModelState.IsValid)
             {
-                _dbcontext.ProductTypes.Update(productTypes);
+                _dbcontext.ProductTypes.Update(productType);
                 _dbcontext.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(productTypes);
+
+            ViewBag.Manufactures = new SelectList(_dbcontext.Manufactures, "Id", "Name", productType.ManufactureId);
+
+            return View(productType);
         }
     }
 }
