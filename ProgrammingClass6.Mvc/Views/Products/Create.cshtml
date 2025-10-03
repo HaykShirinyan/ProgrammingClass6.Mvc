@@ -82,10 +82,10 @@
         <select asp-for="ProductTypeId" class="form-control">
             <option></option>
 
-            @foreach (ProductType productType in ViewBag.ProductTypes)
+            foreach (ProductType productType in ViewBag.ProductTypes)
             {
-                <option value="@productType.Id">
-                    @productType.Name
+                <option value="productType.Id">
+                    productType.Name
                 </option>
             }
         </select>
