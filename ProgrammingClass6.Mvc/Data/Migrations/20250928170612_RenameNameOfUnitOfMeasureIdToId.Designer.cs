@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProgrammingClass6.Mvc.Data;
 
@@ -11,9 +12,11 @@ using ProgrammingClass6.Mvc.Data;
 namespace ProgrammingClass6.Mvc.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250928170612_RenameNameOfUnitOfMeasureIdToId")]
+    partial class RenameNameOfUnitOfMeasureIdToId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -299,15 +302,10 @@ namespace ProgrammingClass6.Mvc.Data.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UnitOfMeasureId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("UnitPrice")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UnitOfMeasureId");
 
                     b.ToTable("ProductTypes");
                 });
@@ -393,15 +391,6 @@ namespace ProgrammingClass6.Mvc.Data.Migrations
                         .HasForeignKey("ManufacturerId");
 
                     b.Navigation("Manufacturer");
-                });
-
-            modelBuilder.Entity("ProgrammingClass6.Mvc.Models.ProductType", b =>
-                {
-                    b.HasOne("ProgrammingClass6.Mvc.Models.UnitOfMeasure", "UnitOfMeasure")
-                        .WithMany()
-                        .HasForeignKey("UnitOfMeasureId");
-
-                    b.Navigation("UnitOfMeasure");
                 });
 #pragma warning restore 612, 618
         }

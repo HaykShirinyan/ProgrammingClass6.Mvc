@@ -38,6 +38,21 @@
         <input asp-for="Quantity" class="form-control"/>
     </div>
 
+    <div class="mb-3">
+        <label asp-for="UnitOfMeasureId" class="form-label">
+            Unit Of Measure(Diametere CM)
+        </label>
+        <select asp-for="UnitOfMeasureId" class="form-control">
+            <option></option>
+            @foreach (UnitOfMeasure unitOfMEasure in ViewBag.UnitOfMeasures)
+            {
+                <option value="@unitOfMEasure.Id"> 
+                    @unitOfMEasure.Diametere
+                </option>
+            }
+        </select> 
+    </div>
+
     <div>
         <a class="btn btn-secondary" asp-controller="ProductTypes" asp-action="Index">
             Cancel
