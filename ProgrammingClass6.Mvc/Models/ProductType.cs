@@ -11,11 +11,11 @@ namespace ProgrammingClass6.Mvc.Models
         [Required]
         [StringLength(100)]
         public string Name { get; set; }
-        public string? Code { get; set; } // Nullable string for optional data
+        public string Code { get; set; } 
 
         [StringLength(1500)]
-        public string? Description { get; set; } // Nullable string for optional data
-        public string? ImageUrl { get; set; } // Nullable string for optional data
+        public string Description { get; set; } 
+        public string ImageUrl { get; set; } 
         public bool IsActive { get; set; }
         public int SortOrder { get; set; }
         public int? ParentProductTypeId { get; set; } // Nullable foreign key for hierarchy

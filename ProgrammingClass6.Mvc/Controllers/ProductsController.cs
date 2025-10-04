@@ -22,7 +22,6 @@ namespace ProgrammingClass6.Mvc.Controllers
         }
 
         [HttpGet]
-
         public IActionResult Create()
         {
 
@@ -30,7 +29,6 @@ namespace ProgrammingClass6.Mvc.Controllers
         }
 
         [HttpPost]
-
         public IActionResult Create(Product product)
         {
 

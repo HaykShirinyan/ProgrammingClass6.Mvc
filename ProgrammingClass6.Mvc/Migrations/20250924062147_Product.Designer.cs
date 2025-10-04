@@ -11,8 +11,8 @@ using ProgrammingClass6.Mvc.Data;
 namespace ProgrammingClass6.Mvc.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250920072826_ProductType")]
-    partial class ProductType
+    [Migration("20250924062147_Product")]
+    partial class Product
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -237,12 +237,17 @@ namespace ProgrammingClass6.Mvc.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("UnitOfMeasureId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<decimal>("UnitPrice")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProductTypeId");
+
+                    b.HasIndex("UnitOfMeasureId");
 
                     b.ToTable("Products");
                 });
@@ -288,6 +293,41 @@ namespace ProgrammingClass6.Mvc.Migrations
                     b.HasIndex("ParentProductTypeId");
 
                     b.ToTable("ProductTypes");
+                });
+
+            modelBuilder.Entity("ProgrammingClass6.Mvc.Models.UnitOfMeasure", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("ConversionFactor")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsBaseUnit")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Symbol")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UnitType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UnitOfMeasures");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -346,6 +386,10 @@ namespace ProgrammingClass6.Mvc.Migrations
                     b.HasOne("ProgrammingClass6.Mvc.Models.ProductType", null)
                         .WithMany("Products")
                         .HasForeignKey("ProductTypeId");
+
+                    b.HasOne("ProgrammingClass6.Mvc.Models.UnitOfMeasure", null)
+                        .WithMany("Products")
+                        .HasForeignKey("UnitOfMeasureId");
                 });
 
             modelBuilder.Entity("ProgrammingClass6.Mvc.Models.ProductType", b =>
@@ -358,6 +402,11 @@ namespace ProgrammingClass6.Mvc.Migrations
                 });
 
             modelBuilder.Entity("ProgrammingClass6.Mvc.Models.ProductType", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("ProgrammingClass6.Mvc.Models.UnitOfMeasure", b =>
                 {
                     b.Navigation("Products");
                 });

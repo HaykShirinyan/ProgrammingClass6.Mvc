@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProgrammingClass6.Mvc.Migrations
 {
     /// <inheritdoc />
-    public partial class Products : Migration
+    public partial class ProductType : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -51,19 +51,47 @@ namespace ProgrammingClass6.Mvc.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Products",
+                name: "ProductTypes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    Code = table.Column<string>(type: "TEXT", nullable: true),
                     Description = table.Column<string>(type: "TEXT", maxLength: 1500, nullable: true),
-                    UnitPrice = table.Column<decimal>(type: "TEXT", nullable: false),
-                    Quantity = table.Column<int>(type: "INTEGER", nullable: false)
+                    ImageUrl = table.Column<string>(type: "TEXT", nullable: true),
+                    IsActive = table.Column<bool>(type: "INTEGER", nullable: false),
+                    SortOrder = table.Column<int>(type: "INTEGER", nullable: false),
+                    ParentProductTypeId = table.Column<int>(type: "INTEGER", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.PrimaryKey("PK_ProductTypes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductTypes_ProductTypes_ParentProductTypeId",
+                        column: x => x.ParentProductTypeId,
+                        principalTable: "ProductTypes",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UnitOfMeasures",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
+                    Symbol = table.Column<string>(type: "TEXT", maxLength: 10, nullable: false),
+                    UnitType = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
+                    ConversionFactor = table.Column<decimal>(type: "TEXT", nullable: false),
+                    IsBaseUnit = table.Column<bool>(type: "INTEGER", nullable: false),
+                    IsActive = table.Column<bool>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UnitOfMeasures", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -172,6 +200,34 @@ namespace ProgrammingClass6.Mvc.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
+                    Description = table.Column<string>(type: "TEXT", maxLength: 1500, nullable: true),
+                    UnitPrice = table.Column<decimal>(type: "TEXT", nullable: false),
+                    Quantity = table.Column<int>(type: "INTEGER", nullable: false),
+                    ProductTypeId = table.Column<int>(type: "INTEGER", nullable: true),
+                    UnitOfMeasureId = table.Column<int>(type: "INTEGER", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Products_ProductTypes_ProductTypeId",
+                        column: x => x.ProductTypeId,
+                        principalTable: "ProductTypes",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Products_UnitOfMeasures_UnitOfMeasureId",
+                        column: x => x.UnitOfMeasureId,
+                        principalTable: "UnitOfMeasures",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -208,6 +264,21 @@ namespace ProgrammingClass6.Mvc.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_ProductTypeId",
+                table: "Products",
+                column: "ProductTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_UnitOfMeasureId",
+                table: "Products",
+                column: "UnitOfMeasureId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductTypes_ParentProductTypeId",
+                table: "ProductTypes",
+                column: "ParentProductTypeId");
         }
 
         /// <inheritdoc />
@@ -236,6 +307,12 @@ namespace ProgrammingClass6.Mvc.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "ProductTypes");
+
+            migrationBuilder.DropTable(
+                name: "UnitOfMeasures");
         }
     }
 }

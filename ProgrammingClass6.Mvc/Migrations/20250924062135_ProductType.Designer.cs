@@ -11,8 +11,8 @@ using ProgrammingClass6.Mvc.Data;
 namespace ProgrammingClass6.Mvc.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250920081057_UnitOfMeasur")]
-    partial class UnitOfMeasur
+    [Migration("20250924062135_ProductType")]
+    partial class ProductType
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

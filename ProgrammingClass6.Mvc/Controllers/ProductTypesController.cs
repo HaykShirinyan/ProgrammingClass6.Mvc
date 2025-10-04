@@ -8,11 +8,32 @@ namespace ProgrammingClass6.Mvc.Controllers
     {
         private ApplicationDbContext _dbContext = dbContext;
 
+        [HttpGet]
         public IActionResult Index()
         {
-            List<ProductType> products = _dbContext.ProductTypes.ToList();
+            List<ProductType> productTypes = _dbContext.ProductTypes.ToList();
 
-            return View(products);
+            return View(productTypes);
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(ProductType productType)
+        {
+            if (ModelState.IsValid)
+            {
+                _dbContext.ProductTypes.Add(productType);
+                _dbContext.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            return View();
         }
     }
 }
