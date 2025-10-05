@@ -1,73 +1,27 @@
-body{
-    font-family: Arial, sans-serif;
-    margin: 0;
-    color: white;
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmVzdGF1cmFudHxlbnwwfHwwfHx8MA%3D%3D);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
+html {
+  font-size: 14px;
 }
 
-.site-header {
-    background-color: black;
-    color: white;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
 }
 
-.site-title {
-    margin: 0;
-    font-size: 24px;
-    color: white;
-    text-decoration: none;
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-.site-title a{
-    color: white;
-    text-decoration: none;
+html {
+  position: relative;
+  min-height: 100%;
 }
 
-.nav-menu {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-    padding: 0;
-    margin: 0;
+body {
+  margin-bottom: 60px;
 }
 
-.nav-menu li a {
-    color: white;
-    text-decoration: none;
-}
-
-.nav-menu li a:hover {
-    text-decoration: underline;
-}
-
-button {
-    background-color: white;
-    color: black;
-    font-size: 14px;
-    padding: 10px 20px;
-    border: 2px solid white;
-    border-radius: 1px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-button:hover {
-    background-color: black;
-    border: 2px solid black;
-    color: white;
-}
-
-.Main{
-    margin-top: 210px;
-}
-
-.Main h1{
-    font-size: 60px;
+.index-image{
+  padding-top: 50px;
+  width: 400px;
 }
