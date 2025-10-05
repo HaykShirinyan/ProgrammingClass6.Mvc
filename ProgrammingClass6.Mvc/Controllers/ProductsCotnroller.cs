@@ -1,56 +1,81 @@
 using Microsoft.AspNetCore.Mvc;
 using ProgrammingClass6.Mvc.Data;
 using ProgrammingClass6.Mvc.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace ProgrammingClass6.Mvc.Controllers
 {
-	public class ProductsController : Controller
-	{
-		private ApplicationDbContext _dbContext;
-		public ProductsController(ApplicationDbContext dbContext)
-		{
-			_dbContext = dbContext;
-		}
+    public class ProductsController : Controller
+    {
+        private ApplicationDbContext _dbContext;
 
-		public IActionResult Index()
-		{
-			var products = _dbContext.Products.ToList();
-			return View(products);
-		}
+        public ProductsController(ApplicationDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
 
-		[HttpGet]
-		public IActionResult Create()
-		{
-			return View();
-		}
+        [HttpGet]
+        public IActionResult Index()
+        {
+            List<Product> products = _dbContext
+                .Products
+                .Include(product => product.Manufacturer)
+                .ToList();
 
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public IActionResult Create(Product product)
-		{
-			_dbContext.Products.Add(product);
-			_dbContext.SaveChanges();
+            return View(products);
+        }
 
-			return RedirectToAction("Index");
-		}
+        [HttpGet]
+        public IActionResult Create()
+        {
+            ViewBag.Manufacturers = _dbContext.Manufacturers.ToList();
+            return View();
+        }
 
-		public IActionResult Edit(int id)
-		{
-			var product = _dbContext
-				.Products
-				.FirstOrDefault(p=> p.Id == id);
+        [HttpPost]
+        public IActionResult Create(Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                _dbContext.Products.Add(product);
+                _dbContext.SaveChanges();
 
-			return View(product);
-		}
+                return RedirectToAction("Index");
+            }
 
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public IActionResult Edit(Product product)
-		{
-			_dbContext.Products.Update(product);
-			_dbContext.SaveChanges();
+            ViewBag.Manufacturers = _dbContext.Manufacturers.ToList();
 
-			return RedirectToAction("Index");
-		}
-	}
+            return View();
+        }
+
+        // /products/edit/{id}
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var product = _dbContext
+                .Products
+                .SingleOrDefault(dbProductRow => dbProductRow.Id == id);
+
+            ViewBag.Manufacturers = _dbContext.Manufacturers.ToList();
+
+            return View(product);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                _dbContext.Products.Update(product);
+                _dbContext.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.Manufacturers = _dbContext.Manufacturers.ToList();
+
+            return View(product);
+        }
+    }
 }
