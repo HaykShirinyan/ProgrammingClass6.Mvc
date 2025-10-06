@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProgrammingClass6.Mvc.Data;
 
@@ -11,9 +12,11 @@ using ProgrammingClass6.Mvc.Data;
 namespace ProgrammingClass6.Mvc.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251006191213_Sizess")]
+    partial class Sizess
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -339,36 +342,6 @@ namespace ProgrammingClass6.Mvc.Data.Migrations
                     b.ToTable("ProductCategories");
                 });
 
-            modelBuilder.Entity("ProgrammingClass6.Mvc.Models.ProductColor", b =>
-                {
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ColorId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductId", "ColorId");
-
-                    b.HasIndex("ColorId");
-
-                    b.ToTable("ProductColors");
-                });
-
-            modelBuilder.Entity("ProgrammingClass6.Mvc.Models.ProductSize", b =>
-                {
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SizeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductId", "SizeId");
-
-                    b.HasIndex("SizeId");
-
-                    b.ToTable("ProductSizes");
-                });
-
             modelBuilder.Entity("ProgrammingClass6.Mvc.Models.ProductType", b =>
                 {
                     b.Property<int>("Id")
@@ -385,24 +358,6 @@ namespace ProgrammingClass6.Mvc.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ProductTypes");
-                });
-
-            modelBuilder.Entity("ProgrammingClass6.Mvc.Models.Size", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Sizes")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Size");
                 });
 
             modelBuilder.Entity("ProgrammingClass6.Mvc.Models.UnitOfMeasure", b =>
@@ -506,44 +461,6 @@ namespace ProgrammingClass6.Mvc.Data.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("ProgrammingClass6.Mvc.Models.ProductColor", b =>
-                {
-                    b.HasOne("ProgrammingClass6.Mvc.Models.Color", "Color")
-                        .WithMany()
-                        .HasForeignKey("ColorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProgrammingClass6.Mvc.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Color");
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("ProgrammingClass6.Mvc.Models.ProductSize", b =>
-                {
-                    b.HasOne("ProgrammingClass6.Mvc.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProgrammingClass6.Mvc.Models.Size", "Size")
-                        .WithMany()
-                        .HasForeignKey("SizeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-
-                    b.Navigation("Size");
                 });
 #pragma warning restore 612, 618
         }
