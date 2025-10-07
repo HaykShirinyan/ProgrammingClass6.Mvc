@@ -6,6 +6,10 @@
 @{
 }
 
+<a class="mt-3 btn btn-primary" asp-controller="UnitOfMeasures" asp-action="Create">
+    Add new  unit of measure
+</a>
+
 <div>
     <table class="table">
         <thead>
@@ -53,6 +57,11 @@
                     </td>
                     <td>
                         @measure.ConversionFactor
+                    </td>
+                                         <td>
+                    <a class="btn btn-secondary" asp-controller="UnitOfMeasures" asp-action="Edit" asp-route-id="@measure.Id">
+                        Edit
+                        </a>
                     </td>
                 </tr>
             }

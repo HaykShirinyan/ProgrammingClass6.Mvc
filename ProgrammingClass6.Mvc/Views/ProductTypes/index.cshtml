@@ -69,6 +69,11 @@
                     <td>
                         @productType.UpdatedDate
                     </td>
+                     <td>
+                        <a class="btn btn-secondary" asp-controller="ProductTypes" asp-action="Edit" asp-route-id="@productType.Id">
+                        Edit
+                        </a>
+                    </td>
                 </tr>
             }
         </tbody>

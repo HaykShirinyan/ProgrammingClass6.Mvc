@@ -53,7 +53,6 @@ namespace ProgrammingClass6.Mvc.Controllers
         }
 
         [HttpPost]
-
         public IActionResult Edit(Product product)
         {
             if (ModelState.IsValid)

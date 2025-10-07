@@ -4,16 +4,16 @@ using ProgrammingClass6.Mvc.Models;
 
 namespace ProgrammingClass6.Mvc.Controllers
 {
-    public class ProductTypesController(ApplicationDbContext dbContext) : Controller
+    public class UnitOfMeasuresController(ApplicationDbContext dbContext) : Controller
     {
         private ApplicationDbContext _dbContext = dbContext;
 
         [HttpGet]
         public IActionResult Index()
         {
-            List<ProductType> productTypes = _dbContext.ProductTypes.ToList();
+            List<UnitOfMeasure> unitOfMeasures = _dbContext.UnitOfMeasures.ToList();
 
-            return View(productTypes);
+            return View(unitOfMeasures);
         }
 
         [HttpGet]
@@ -23,35 +23,35 @@ namespace ProgrammingClass6.Mvc.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(ProductType productType)
+        public IActionResult Create(UnitOfMeasure unitOfMeasure)
         {
-
             if (ModelState.IsValid)
             {
-                _dbContext.ProductTypes.Add(productType);
+
+                _dbContext.UnitOfMeasures.Add(unitOfMeasure);
                 _dbContext.SaveChanges();
 
                 return RedirectToAction("Index");
             }
 
             return View();
-
         }
+        
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            ProductType productType = _dbContext.ProductTypes.SingleOrDefault(p => p.Id == id);
+            UnitOfMeasure unitOfMeasure = _dbContext.UnitOfMeasures.SingleOrDefault(p => p.Id == id);
 
-            return View(productType);
+            return View(unitOfMeasure);
         }
 
         [HttpPost]
-        public IActionResult Edit(ProductType productType)
+        public IActionResult Edit(UnitOfMeasure unitOfMeasure)
         {
             if (ModelState.IsValid)
             {
-                _dbContext.ProductTypes.Update(productType);
+                _dbContext.UnitOfMeasures.Update(unitOfMeasure);
                 _dbContext.SaveChanges();
 
                 return RedirectToAction("Index");

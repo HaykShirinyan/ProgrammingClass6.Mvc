@@ -1,14 +1,23 @@
 @model ProductType
+
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
 }
+
 <h1 class="h3">
-    Product Type
+    Edit product type
 </h1>
 
-<form asp-controller="ProductTypes" asp-action="Create">
+
+<form asp-controller="ProductTypes" asp-action="Edit">
+    <div class="mb-3">
+        <label asp-for="Id" class="form-label">
+            ID
+        </label>
+        <input asp-for="Id" class="form-control" readonly />
+    </div>
     <div class="mb-3">
         <label asp-for="Name" class="form-label">
             Name
@@ -21,10 +30,11 @@
         <label asp-for="Code" class="form-label">
             Code
         </label>
-        <input asp-for="Code" class="form-control"/>
+        <input asp-for="Code" class="form-control" />
         <span asp-validation-for="Code" class="text-danger"></span>
     </div>
-    
+
+        
     <div class="mb-3">
         <label asp-for="Description" class="form-label">
             Description
@@ -33,21 +43,22 @@
         </textarea>
         <span asp-validation-for="Description" class="text-danger"></span>
     </div>
+
     <div class="mb-3">
         <label asp-for="ImageUrl" class="form-label">
-            Image URL
+            Image Url
         </label>
         <input asp-for="ImageUrl" class="form-control"/>
         <span asp-validation-for="ImageUrl" class="text-danger"></span>
     </div>
-    <div class="mb-3">
+   <div class="mb-3">
         <label asp-for="IsActive" class="form-label">
             Active:
         </label>
         <input type="checkbox" asp-for="IsActive"/>
         <span asp-validation-for="IsActive" class="text-danger"></span>
     </div>
-    <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between">
         <div class="mb-3">
         <label asp-for="SortOrder" class="form-label">
             Sort Order:
@@ -55,23 +66,20 @@
         <input type="number" asp-for="SortOrder" class="form-control"/>
         <span asp-validation-for="SortOrder" class="text-danger"></span>
     </div>
-     <div class="mb-3">
+         <div class="mb-3">
         <label asp-for="CreatedDate" class="form-label">
             Created:
         </label>
         <input type="date" asp-for="CreatedDate" class="form-control"/>
         <span asp-validation-for="CreatedDate" class="text-danger"></span>
     </div>
-    <div class="mb-3">
+        <div class="mb-3">
         <label asp-for="UpdatedDate" class="form-label">
             Updated:
         </label>
         <input type="date" asp-for="UpdatedDate" class="form-control"/>
         <span asp-validation-for="UpdatedDate" class="text-danger"></span>
     </div>
-    </div>
-
-    <div>
         <a class="btn btn-secondary" asp-controller="ProductTypes" asp-action="Index">
             Cancel
         </a>
@@ -79,5 +87,4 @@
             Save
         </button>
     </div>
-
 </form>

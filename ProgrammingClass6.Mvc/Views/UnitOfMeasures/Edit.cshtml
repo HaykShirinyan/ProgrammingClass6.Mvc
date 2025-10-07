@@ -1,0 +1,78 @@
+@model UnitOfMeasure
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<h1 class="h3">
+    Edit unit of measure
+</h1>
+
+
+<form asp-controller="UnitOfMeasures" asp-action="Edit">
+    <div class="mb-3">
+        <label asp-for="Id" class="form-label">
+            ID
+        </label>
+        <input asp-for="Id" class="form-control" readonly />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">
+            Name
+        </label>
+        <input asp-for="Name" class="form-control"/>
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+     <div class="mb-3">
+        <label asp-for="Symbol" class="form-label">
+            Symbol
+        </label>
+        <input asp-for="Symbol" class="form-control"/>
+        <span asp-validation-for="Symbol" class="text-danger"></span>
+    </div>
+
+        
+   <div class="mb-3">
+        <label asp-for="UnitType" class="form-label">
+            Unit Type
+        </label>
+        <input asp-for="UnitType" class="form-control"/>
+        <span asp-validation-for="UnitType" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ConversionFactor" class="form-label">
+            Conversion Factor
+        </label>
+        <input type="number" asp-for="ConversionFactor" class="form-control"/>
+        <span asp-validation-for="ConversionFactor" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label  asp-for="IsBaseUnit" class="form-label">
+            Is Base Unit
+        </label>
+        <input type="checkbox" asp-for="IsBaseUnit" />
+        <span asp-validation-for="IsBaseUnit" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="IsActive" class="form-label">
+           Is Active:
+        </label>
+        <input type="checkbox" asp-for="IsActive"/>
+        <span asp-validation-for="IsActive" class="text-danger"></span>
+    </div>
+
+    <div class="d-flex justify-content-between">
+        <a class="btn btn-secondary" asp-controller="UnitOfMeasures" asp-action="Index">
+            Cancel
+        </a>
+        <button class="btn btn-primary" type="submit">
+            Save
+        </button>
+    </div>
+</form>
