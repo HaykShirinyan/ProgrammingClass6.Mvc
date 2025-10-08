@@ -9,7 +9,7 @@
 <div>
     <div class="mb-3">
         <a class="btn btn-primary"
-        asp-controller="ProductTypeSize"
+        asp-controller="ProductTypeSizes"
         asp-action="Create"
         asp-route-productTypeId="@ViewBag.ProductTypeId">
             Add Size
@@ -41,7 +41,7 @@
                         @productType.Size.Description
                     </td>
                     <td>
-                        <form asp-controller="ProductTypeSize"
+                        <form asp-controller="ProductTypeSizes"
                               asp-action="Delete"
                               asp-route-productTypeId="@productType.ProductTypeId"
                               asp-route-sizeId="@productType.SizeId" />

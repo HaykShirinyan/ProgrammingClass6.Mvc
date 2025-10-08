@@ -6,7 +6,7 @@
 @{
 }
 <div>
-    <form asp-controller="ProductTypeColor" asp-action="Create">
+    <form asp-controller="ProductTypeColors" asp-action="Create">
         <div class="mb-3">
             <label asp-for="ProductTypeId" class="form-label">
                 Product Type 
@@ -28,7 +28,7 @@
             </select>
             <div>
                 <a class="btn btn-secondary"
-                   asp-controller="ProductTypeColor"
+                   asp-controller="ProductTypeColors"
                    asp-action="Index"
                    asp-route-productTypeId="@Model.ProductTypeId">
                     Cancel

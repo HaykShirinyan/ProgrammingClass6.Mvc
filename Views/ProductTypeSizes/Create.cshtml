@@ -7,7 +7,7 @@
 }
 
 <div>
-    <form asp-controller="ProductTypeSize" asp-action="Create">
+    <form asp-controller="ProductTypeSizes" asp-action="Create">
         <div class="mb-3">
             <label asp-for="ProductTypeId" class="form-label">
                 Product Type
@@ -32,7 +32,7 @@
         </div>
         <div>
             <a class="btn btn-secondary"
-            asp-controller="ProductTypeSize"
+            asp-controller="ProductTypeSizes"
             asp-action="Index"
             asp-route-ProductTypeId="@Model.ProductTypeId">
                 Cancel

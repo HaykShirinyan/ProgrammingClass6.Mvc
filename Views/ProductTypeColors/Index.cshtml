@@ -9,7 +9,7 @@
 <div>
     <div>
         <a class="btn btn-primary"
-        asp-controller="ProductTypeColor"
+        asp-controller="ProductTypeColors"
         asp-action="Create"
         asp-route-productTypeId="@ViewBag.ProductTypeId">
             Add Color
@@ -41,7 +41,7 @@
                     @productType.Color.Description
                 </td>
                 <td>
-                    <form asp-controller="ProductTypeColor"
+                    <form asp-controller="ProductTypeColors"
                           asp-action="Delete"
                           asp-route-productTypeId="@productType.ProductTypeId"
                           asp-route-colorId="@productType.ColorId" >

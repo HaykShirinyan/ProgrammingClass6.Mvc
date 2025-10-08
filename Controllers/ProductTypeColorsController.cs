@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProgrammingClass6.Mvc.Data;
+using ProgrammingClass6.Mvc.Data.Migrations;
 using ProgrammingClass6.Mvc.Models;
 
 
