@@ -25,13 +25,10 @@ namespace ProgrammingClass6.Mvc.Controllers
         [HttpGet]
         public IActionResult Create(int producttypeId)
         {
+            ViewBag.ProductTypeId = producttypeId;
             ViewBag.Sizes = dbContext.Sizes.ToList();
 
-            var productTypeSize = new ProductTypeSize
-            {
-                ProductTypeId = producttypeId
-            };
-            return View(productTypeSize);
+            return View();
         }
 
         [HttpPost]

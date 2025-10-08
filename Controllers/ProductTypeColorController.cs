@@ -28,19 +28,12 @@ namespace ProgrammingClass6.Mvc.Controllers
         [HttpGet]
         public IActionResult Create(int productTypeId)
         {
-
+            ViewBag.ProductTypeId = productTypeId;
             ViewBag.Colors = dbContext.Colors.ToList();
 
-            var productTypeColor = new ProductTypeColor
-            {
-                ProductTypeId = productTypeId,
-
-            };
-
-
-            return View(productTypeColor);
-
+            return View();
         }
+
         [HttpPost]
         public IActionResult Create(ProductTypeColor productTypeColor)
         {
