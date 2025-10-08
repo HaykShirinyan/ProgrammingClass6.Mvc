@@ -31,9 +31,12 @@ namespace ProgrammingClass6.Mvc.Controllers
 
             ViewBag.Colors = dbContext.Colors.ToList();
 
-            var productTypeColor = new ProductTypeColor();
+            var productTypeColor = new ProductTypeColor
+            {
+                ProductTypeId = productTypeId,
 
-            productTypeColor.ProductTypeId = productTypeId;
+            };
+
 
             return View(productTypeColor);
 
