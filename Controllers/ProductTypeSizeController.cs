@@ -4,10 +4,10 @@ using ProgrammingClass6.Mvc.Data;
 using ProgrammingClass6.Mvc.Models;
 namespace ProgrammingClass6.Mvc.Controllers
 {
-    public class ProductTypeSizeController : Controller
+    public class ProductTypeSizesController : Controller
     {
-        private ApplicationDbContext dbContext;
-        public ProductTypeSizeController(ApplicationDbContext dbContext)
+        private readonly ApplicationDbContext dbContext;
+        public ProductTypeSizesController(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
         }
@@ -22,21 +22,29 @@ namespace ProgrammingClass6.Mvc.Controllers
                 .ToList();
             return View(productTypeSizes);
         }
-       
+        [HttpGet]
+        public IActionResult Create(int producttypeId)
+        {
+            ViewBag.Sizes = dbContext.Sizes.ToList();
+
+            var productTypeSize = new ProductTypeSize
+            {
+                ProductTypeId = producttypeId
+            };
+            return View(productTypeSize);
+        }
+
         [HttpPost]
         public IActionResult Create(ProductTypeSize productTypeSize)
         {
-            if (ModelState.IsValid)
-            {
+
                 dbContext.ProductTypeSizes.Add(productTypeSize);
                 dbContext.SaveChanges();
 
                 return RedirectToAction("Index", new { producttypeId = productTypeSize.ProductTypeId });
-            }
 
-            ViewBag.Sizes = dbContext.ProductTypeSizes.ToList();
-            return View(productTypeSize);
         }
+
         [HttpPost]
 
         public IActionResult Delete(int producttypeId, int sizeId)

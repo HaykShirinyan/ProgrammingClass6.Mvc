@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProgrammingClass6.Mvc.Data;
 
@@ -11,9 +12,11 @@ using ProgrammingClass6.Mvc.Data;
 namespace ProgrammingClass6.Mvc.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251008060138_Color")]
+    partial class Color
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -308,21 +311,6 @@ namespace ProgrammingClass6.Mvc.Data.Migrations
                     b.ToTable("ProductTypes");
                 });
 
-            modelBuilder.Entity("ProgrammingClass6.Mvc.Models.ProductTypeColor", b =>
-                {
-                    b.Property<int>("ProductTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ColorId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductTypeId", "ColorId");
-
-                    b.HasIndex("ColorId");
-
-                    b.ToTable("ProductTypeColors");
-                });
-
             modelBuilder.Entity("ProgrammingClass6.Mvc.Models.ProductTypeSize", b =>
                 {
                     b.Property<int>("ProductTypeId")
@@ -358,7 +346,7 @@ namespace ProgrammingClass6.Mvc.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sizes");
+                    b.ToTable("Size");
                 });
 
             modelBuilder.Entity("ProgrammingClass6.Mvc.Models.UnitOfMeasure", b =>
@@ -456,25 +444,6 @@ namespace ProgrammingClass6.Mvc.Data.Migrations
                         .HasForeignKey("ManufactureId");
 
                     b.Navigation("Manufacture");
-                });
-
-            modelBuilder.Entity("ProgrammingClass6.Mvc.Models.ProductTypeColor", b =>
-                {
-                    b.HasOne("ProgrammingClass6.Mvc.Models.Color", "Color")
-                        .WithMany()
-                        .HasForeignKey("ColorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProgrammingClass6.Mvc.Models.ProductType", "ProductType")
-                        .WithMany()
-                        .HasForeignKey("ProductTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Color");
-
-                    b.Navigation("ProductType");
                 });
 
             modelBuilder.Entity("ProgrammingClass6.Mvc.Models.ProductTypeSize", b =>

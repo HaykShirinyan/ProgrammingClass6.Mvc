@@ -7,7 +7,13 @@
 }
 
 <div>
-    <form>
+    <form asp-controller="ProductTypeSize" asp-action="Create">
+        <div class="mb-3">
+            <label asp-for="ProductTypeId" class="form-label">
+                Product Type
+            </label>
+            <input asp-for="ProductTypeId" class="form-control" readonly />
+        </div>
         <div class="mb-3">
             <label asp-for="SizeId" class="form-label">
                 Size
@@ -17,18 +23,19 @@
                 <option value="">
                     -- Select Size --
                 </option>
-                </select>
+               
             @foreach (var size in (List<Size>)ViewBag.Sizes)
             {
                 <option value="@size.Id">@size.Name</option>
             }
+            </select>
         </div>
         <div>
             <a class="btn btn-secondary"
             asp-controller="ProductTypeSize"
             asp-action="Index"
             asp-route-ProductTypeId="@Model.ProductTypeId">
-             Cancel
+                Cancel
             </a>
             <button type="submit" class="btn btn-primary">
                 Save
