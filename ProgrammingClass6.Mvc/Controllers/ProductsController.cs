@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿﻿using Microsoft.AspNetCore.Mvc;
 using ProgrammingClass6.Mvc.Data;
 using ProgrammingClass6.Mvc.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProgrammingClass6.Mvc.Controllers
 {
@@ -16,7 +17,7 @@ namespace ProgrammingClass6.Mvc.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            List<Product> products = _dbContext.Products.ToList();
+            List<Product> products = _dbContext.Products.Include(product => product.ProductType).ToList();
 
             return View(products);
         }
@@ -24,7 +25,7 @@ namespace ProgrammingClass6.Mvc.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-
+            ViewBag.ProductTypes = _dbContext.ProductTypes.ToList();
             return View();
         }
 
@@ -40,6 +41,8 @@ namespace ProgrammingClass6.Mvc.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.ProductTypes = _dbContext.ProductTypes.ToList();
+
             return View();
 
         }
@@ -48,6 +51,7 @@ namespace ProgrammingClass6.Mvc.Controllers
         public IActionResult Edit(int id)
         {
             Product product = _dbContext.Products.SingleOrDefault(p => p.Id == id);
+            ViewBag.ProductTypes = _dbContext.ProductTypes.ToList();
 
             return View(product);
         }
@@ -63,6 +67,8 @@ namespace ProgrammingClass6.Mvc.Controllers
                 return RedirectToAction("Index");
 
             }
+
+            ViewBag.ProductTypes = _dbContext.ProductTypes.ToList();
 
             return View();
         }

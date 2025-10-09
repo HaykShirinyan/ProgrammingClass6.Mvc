@@ -16,7 +16,7 @@
         <label asp-for="Name" class="form-label">
             Name
         </label>
-        <input asp-for="Name" class="form-control"/>
+        <input asp-for="Name" class="form-control" />
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
     <div class="mb-3">
@@ -31,15 +31,31 @@
         <label asp-for="UnitPrice" class="form-label">
             Unit Price
         </label>
-        <input asp-for="UnitPrice" class="form-control"/>
+        <input asp-for="UnitPrice" class="form-control" />
         <span asp-validation-for="UnitPrice" class="text-danger"></span>
     </div>
     <div class="mb-3">
         <label asp-for="Quantity" class="form-label">
             Quantity
         </label>
-        <input asp-for="Quantity" class="form-control"/>
-        <span asp-validation-for="Quantity" class="text-danger"></span>    </div>
+        <input asp-for="Quantity" class="form-control" />
+        <span asp-validation-for="Quantity" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ProductTypeId" class="form-label">
+            Product Type
+        </label>
+        <select asp-for="ProductTypeId" class="form-control">
+            <option></option>
+            @foreach (ProductType productType in ViewBag.ProductTypes)
+            {
+                <option value="@productType.Id">
+                    @productType.Name
+                </option>
+            }
+        </select>
+    </div>
 
     <div>
         <a class="btn btn-secondary" asp-controller="Products" asp-action="Index">
