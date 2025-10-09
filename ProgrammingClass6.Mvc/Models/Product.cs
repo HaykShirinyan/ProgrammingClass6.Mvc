@@ -22,5 +22,9 @@ namespace ProgrammingClass6.Mvc.Models
         [ForeignKey(nameof(ProductType))]
         public int? ProductTypeId { get; set; }
         public ProductType ProductType { get; set; }
+
+        [ForeignKey(nameof(UnitOfMeasure))]
+        public int? UnitOfMeasureId { get; set; }
+        public UnitOfMeasure UnitOfMeasure { get; set; }
     }
 }

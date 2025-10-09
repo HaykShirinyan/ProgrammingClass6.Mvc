@@ -57,6 +57,21 @@
         </select>
     </div>
 
+    <div class="mb-3">
+        <label asp-for="UnitOfMeasureId" class="form-label">
+            Unit of measure
+        </label>
+        <select asp-for="UnitOfMeasureId" class="form-control">
+            <option></option>
+            @foreach (UnitOfMeasure measure in ViewBag.UnitOfMeasure)
+            {
+                <option value="@measure.Id">
+                    @measure.Name
+                </option>
+            }
+        </select>
+    </div>
+
     <div>
         <a class="btn btn-secondary" asp-controller="Products" asp-action="Index">
             Cancel

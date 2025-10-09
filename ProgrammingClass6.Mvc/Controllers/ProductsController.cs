@@ -17,7 +17,10 @@ namespace ProgrammingClass6.Mvc.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            List<Product> products = _dbContext.Products.Include(product => product.ProductType).ToList();
+            List<Product> products = _dbContext.Products
+                .Include(product => product.ProductType)
+                .Include(product => product.UnitOfMeasure)
+                .ToList();
 
             return View(products);
         }
@@ -26,6 +29,7 @@ namespace ProgrammingClass6.Mvc.Controllers
         public IActionResult Create()
         {
             ViewBag.ProductTypes = _dbContext.ProductTypes.ToList();
+            ViewBag.UnitOfMeasure = _dbContext.UnitOfMeasures.ToList();
             return View();
         }
 
@@ -42,6 +46,7 @@ namespace ProgrammingClass6.Mvc.Controllers
             }
 
             ViewBag.ProductTypes = _dbContext.ProductTypes.ToList();
+            ViewBag.UnitOfMeasure = _dbContext.UnitOfMeasures.ToList();
 
             return View();
 
@@ -52,6 +57,7 @@ namespace ProgrammingClass6.Mvc.Controllers
         {
             Product product = _dbContext.Products.SingleOrDefault(p => p.Id == id);
             ViewBag.ProductTypes = _dbContext.ProductTypes.ToList();
+            ViewBag.UnitOfMeasure = _dbContext.UnitOfMeasures.ToList();
 
             return View(product);
         }
@@ -69,6 +75,7 @@ namespace ProgrammingClass6.Mvc.Controllers
             }
 
             ViewBag.ProductTypes = _dbContext.ProductTypes.ToList();
+            ViewBag.UnitOfMeasure = _dbContext.UnitOfMeasures.ToList();
 
             return View();
         }
