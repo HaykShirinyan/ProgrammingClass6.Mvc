@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ProgrammingClass6.Mvc.Models
 {
-    public class Category
+    public class Size
     {
 
         [Key]

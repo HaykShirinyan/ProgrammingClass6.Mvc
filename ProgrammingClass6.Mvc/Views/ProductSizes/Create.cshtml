@@ -1,0 +1,47 @@
+@model ProductSize
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div>
+    <form asp-controller="ProductSizes" asp-action="Create">
+        <div class="mb-3">
+            <label asp-for="ProductId" class="form-label">
+                Product
+            </label>
+            <input asp-for="ProductId" class="form-control" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="SizeId" class="form-label">
+                Size
+            </label>
+            <select asp-for="SizeId" class="form-control">
+                <option>-- Please Select --</option>
+
+                @foreach (Size size in ViewBag.Size as List<Size>)
+                {
+                    <option value="@size.Id">
+                        @size.Name
+                    </option>    
+                }
+            </select>
+        </div>
+
+        <div>
+            <a class="btn btn-secondary" 
+                asp-controller="ProductSizes" 
+                asp-action="Index"
+                asp-route-productId="@Model.ProductId">
+                Cancel
+            </a>
+
+            <button type="submit" class="btn btn-primary">
+                Save
+            </button>
+        </div>
+    </form>
+</div>
