@@ -7,7 +7,7 @@
 }
 
 <div>
-    <form asp-controller="ProductTypeSizes" asp-action="Create">
+    <form asp-controller="ProductTypeSizes" asp-action="Create" method="post">
         <div class="mb-3">
             <label asp-for="ProductTypeId" class="form-label">
                 Product Type
@@ -18,13 +18,12 @@
             <label asp-for="SizeId" class="form-label">
                 Size
             </label>
-            <select asp-for="SizeId" class="form-control"
-                    asp-items="ViewBag.SizeId">
+            <select asp-for="SizeId" class="form-control">
                 <option value="">
                     -- Select Size --
                 </option>
-               
-            @foreach (var size in (List<Size>)ViewBag.Sizes)
+
+                @foreach (var size in (List<Size>)ViewBag.Sizes)
             {
                 <option value="@size.Id">@size.Name</option>
             }

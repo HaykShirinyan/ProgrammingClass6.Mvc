@@ -27,7 +27,6 @@ namespace ProgrammingClass6.Mvc.Controllers
         {
             ViewBag.ProductTypeId = producttypeId;
             ViewBag.Sizes = dbContext.Sizes.ToList();
-
             return View();
         }
 

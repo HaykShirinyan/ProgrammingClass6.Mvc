@@ -6,7 +6,7 @@
 @{
 }
 <div>
-    <form asp-controller="ProductTypeColors" asp-action="Create">
+    <form asp-controller="ProductTypeColors" asp-action="Create" method="post">
         <div class="mb-3">
             <label asp-for="ProductTypeId" class="form-label">
                 Product Type 
@@ -19,13 +19,15 @@
             </label>
             <select asp-for="ColorId" class="form-control">
                 <option>-- Please Select -- </option>
-                @foreach (var color in (List<Color>)ViewBag.Colors )
+                @foreach (var color in (List<Color>)ViewBag.Colors)
                 {
                     <option value="@color.Id">
                         @color.Name
                     </option>
                 }
             </select>
+        </div>
+
             <div>
                 <a class="btn btn-secondary"
                    asp-controller="ProductTypeColors"
@@ -37,6 +39,6 @@
                     Save
                 </button>
             </div>
-        </div>
+       
     </form>
 </div>
