@@ -1,0 +1,44 @@
+﻿@model List<ProductColor>
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div>
+    <div class="mb-3">
+        <a class="btn btn-primary" 
+        asp-controller="ProductColors" asp-action="Create" asp-route-ProductId="@ViewBag.ProductId">
+        Add Color
+    </a>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th> Color  </th>
+                <th> Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var product in Model)
+            {
+                <tr>
+                    <td>
+                        @product.Color.Colors
+                    </td>
+                    <td>
+                        <form asp-controller="ProductColors" asp-action="Delete" 
+                            asp-route-productId="@product.ProductId"
+                            asp-route-colorId="@product.ColorId">
+                            <button type="submit" class="btn btn-danger">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

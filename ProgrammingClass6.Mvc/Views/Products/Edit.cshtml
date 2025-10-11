@@ -85,10 +85,10 @@
         <select asp-for="ProductTypeId" class="form-control">
             <option></option>
 
-            @foreach (ProductType productType in ViewBag.ProductTypes)
+            foreach (ProductType productType in ViewBag.ProductTypes)
             {
-                <option value="@productType.Id">
-                    @productType.Name
+                <option value="productType.Id">
+                    productType.Name
                 </option>
             }
         </select>
@@ -97,6 +97,17 @@
     <div class="my-3">
         <a asp-controller="ProductCategories" asp-action="Index" asp-route-productId="@Model.Id">
             Categories
+        </a>
+    </div>
+
+    <div class="mt-3">
+        <a asp-controller="ProductColors" asp-action="Index" asp-route-productId="@Model.Id">
+            Colors
+        </a>
+    </div>
+    <div class="my-3">
+        <a asp-controller="ProductSizes" asp-action="Index" asp-route-productId="@Model.Id">
+            Sizes
         </a>
     </div>
 

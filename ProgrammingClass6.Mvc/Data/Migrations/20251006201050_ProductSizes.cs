@@ -7,6 +7,8 @@ namespace ProgrammingClass6.Mvc.Data.Migrations
     /// <inheritdoc />
     public partial class ProductSizes : Migration
     {
+        internal int ProductId;
+
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
