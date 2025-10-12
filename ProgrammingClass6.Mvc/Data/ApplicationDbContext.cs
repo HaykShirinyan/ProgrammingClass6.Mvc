@@ -20,6 +20,10 @@ namespace ProgrammingClass6.Mvc.Data
 
         public DbSet<ProductSize> ProductSizes { get; set; }
 
+        public DbSet<Color> Colors { get; set; }
+
+        public DbSet<ProductColor> ProductColors { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -34,6 +38,9 @@ namespace ProgrammingClass6.Mvc.Data
 
             builder.Entity<ProductSize>()
             .HasKey(productSize => new { productSize.ProductId, productSize.SizeId });
+
+            builder.Entity<ProductColor>()
+            .HasKey(productColor => new { productColor.ProductId, productColor.ColorId });
         }
     }
 }

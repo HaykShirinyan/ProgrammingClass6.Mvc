@@ -26,11 +26,16 @@ namespace ProgrammingClass6.Mvc
             if (app.Environment.IsDevelopment())
             {
                 app.UseMigrationsEndPoint();
+                //New Added for error handle
+                // app.UseDeveloperExceptionPage();
+
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                //New Added for error handle
+                // app.UseStatusCodePagesWithReExecute("/Error/{0}");
                 app.UseHsts();
             }
 

@@ -56,11 +56,13 @@ namespace ProgrammingClass6.Mvc.Controllers
                 .ProductSizes
                 .SingleOrDefault(ps => ps.ProductId == productId && ps.SizeId == sizeId);
 
-            if (productSize != null)
+
+            if (productSize == null)
             {
-                _dbContext.ProductSizes.Remove(productSize);
-                _dbContext.SaveChanges();
+                return NotFound();
             }
+            _dbContext.ProductSizes.Remove(productSize);
+            _dbContext.SaveChanges();
 
             return RedirectToAction("Index", new { productId = productId });
         }

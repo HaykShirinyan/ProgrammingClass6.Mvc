@@ -56,6 +56,11 @@ namespace ProgrammingClass6.Mvc.Controllers
                 .ProductCategories
                 .SingleOrDefault(productCategory => productCategory.ProductId == productId && productCategory.CategoryId == categoryId);
 
+            if (productCategory == null)
+            {
+                return NotFound();
+            }
+
             _dbContext.Remove(productCategory);
             _dbContext.SaveChanges();
 
