@@ -1,0 +1,56 @@
+﻿@model List<ProductType>
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    UnitePrice
+                </th>
+                <th>
+                    IsActive
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (ProductType productType in Model)
+            {<tr>
+                <td>
+                    @productType.Id
+                </td>
+                <td>
+                    @productType.Name
+                </td>
+                <td>
+                        @productType.Description
+                </td>
+                <td>
+                    @productType.UnitePrice
+                </td>
+                <td>
+                        @productType.IsActive
+               </td>
+
+            </tr>
+                
+            }
+        </tbody>
+
+    </table>
+</div>

@@ -1,0 +1,51 @@
+﻿@model List<UnitOfMeasure>
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    CreatedAt
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (UnitOfMeasure unitOfMeasure in Model)
+            {
+                <tr>
+                    <td>
+                        @unitOfMeasure.Id
+                    </td>
+                    <td>
+                        @unitOfMeasure.Name
+                    </td>
+                    <td>
+                        @unitOfMeasure.Description
+                    </td>
+                    <td>
+                        @unitOfMeasure.CreatedAt
+                    </td>
+
+                </tr>
+
+            }
+        </tbody>
+
+    </table>
+</div>
