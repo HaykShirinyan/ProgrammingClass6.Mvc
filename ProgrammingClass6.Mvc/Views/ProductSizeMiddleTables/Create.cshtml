@@ -1,0 +1,33 @@
+﻿@model ProductSizeMiddleTable
+
+<div>
+    <form asp-controller="ProductSizeMiddleTables" asp-action="Create">
+        <div class="mb-3">
+            <label asp-for="ProductId" class="form-label">Product</label>
+            <input asp-for="ProductId" class="form-control" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ProductSizeId" class="form-label">Product Size</label>
+            <select asp-for="ProductSizeId" class="form-control">
+                <option>-- Please Select --</option>
+
+                @foreach (var productSize in ViewBag.ProductSizes as List<ProductSize>)
+                {
+                    <option value="@productSize.Id">@productSize.Name</option>
+                }
+            </select>
+        </div>
+
+        <div>
+            <a class="btn btn-secondary"
+               asp-controller="ProductSizeMiddleTables"
+               asp-action="Index"
+               asp-route-productId="@Model.ProductId">
+                Cancel
+            </a>
+
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </form>
+</div>

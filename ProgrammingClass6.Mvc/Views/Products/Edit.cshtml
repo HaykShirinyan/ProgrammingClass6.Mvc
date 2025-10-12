@@ -68,6 +68,18 @@
         </a>
     </div>
 
+    <div class="my-3">
+        <a asp-controller="ProductSizeMiddleTables" asp-action="Index" asp-route-productId="@Model.Id">
+            Sizes
+        </a>
+    </div>
+
+    <div class="my-3">
+        <a asp-controller="ProductColors" asp-action="Index" asp-route-productId="@Model.Id">
+            Colors
+        </a>
+    </div>
+
     <div>
         <a class="btn btn-secondary" asp-controller="Products" asp-action="Index">
             Cancel

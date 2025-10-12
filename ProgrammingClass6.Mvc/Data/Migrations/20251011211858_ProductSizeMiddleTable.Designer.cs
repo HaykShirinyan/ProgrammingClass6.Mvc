@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProgrammingClass6.Mvc.Data;
 
@@ -11,9 +12,11 @@ using ProgrammingClass6.Mvc.Data;
 namespace ProgrammingClass6.Mvc.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251011211858_ProductSizeMiddleTable")]
+    partial class ProductSizeMiddleTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -246,28 +249,6 @@ namespace ProgrammingClass6.Mvc.Data.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("ProgrammingClass6.Mvc.Models.Color", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Colors");
-                });
-
             modelBuilder.Entity("ProgrammingClass6.Mvc.Models.Manufacturer", b =>
                 {
                     b.Property<int>("Id")
@@ -338,21 +319,6 @@ namespace ProgrammingClass6.Mvc.Data.Migrations
                     b.ToTable("ProductCategories");
                 });
 
-            modelBuilder.Entity("ProgrammingClass6.Mvc.Models.ProductColor", b =>
-                {
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ColorId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductId", "ColorId");
-
-                    b.HasIndex("ColorId");
-
-                    b.ToTable("ProductColors");
-                });
-
             modelBuilder.Entity("ProgrammingClass6.Mvc.Models.ProductSize", b =>
                 {
                     b.Property<int>("Id")
@@ -387,7 +353,7 @@ namespace ProgrammingClass6.Mvc.Data.Migrations
 
                     b.HasIndex("ProductSizeId");
 
-                    b.ToTable("ProductSizeMiddleTables");
+                    b.ToTable("ProductSizeMiddleTable");
                 });
 
             modelBuilder.Entity("ProgrammingClass6.Mvc.Models.ProductType", b =>
@@ -521,25 +487,6 @@ namespace ProgrammingClass6.Mvc.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("ProgrammingClass6.Mvc.Models.ProductColor", b =>
-                {
-                    b.HasOne("ProgrammingClass6.Mvc.Models.Color", "Color")
-                        .WithMany()
-                        .HasForeignKey("ColorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProgrammingClass6.Mvc.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Color");
 
                     b.Navigation("Product");
                 });

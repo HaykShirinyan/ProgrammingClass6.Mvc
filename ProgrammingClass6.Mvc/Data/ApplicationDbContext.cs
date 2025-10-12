@@ -7,8 +7,15 @@ namespace ProgrammingClass6.Mvc.Data
     public class ApplicationDbContext : IdentityDbContext
     {
         public DbSet<Product> Products { get; set; }
+        public DbSet<ProductType> ProductTypes { get; set; }
+        public DbSet<UnitOfMeasure> UnitOfMeasures { get; set; }
 
         public DbSet<Manufacturer> Manufacturers { get; set; }
+
+        public DbSet<ProductSize> ProductSizes { get; set; }
+        public DbSet<ProductSizeMiddleTable> ProductSizeMiddleTables { get; set; }
+        public DbSet<Color> Colors { get; set; }
+        public DbSet<ProductColor> ProductColors { get; set; }
 
         public DbSet<Category> Categories { get; set; }
 
@@ -26,6 +33,14 @@ namespace ProgrammingClass6.Mvc.Data
             builder
                 .Entity<ProductCategory>()
                 .HasKey(productCategory => new { productCategory.ProductId, productCategory.CategoryId });
+
+            builder
+                .Entity<ProductSizeMiddleTable>()
+                .HasKey(productSizeMiddleTable => new { productSizeMiddleTable.ProductId, productSizeMiddleTable.ProductSizeId });
+
+            builder
+                .Entity<ProductColor>()
+                .HasKey(productColor => new { productColor.ProductId, productColor.ColorId });
         }
     }
 }
