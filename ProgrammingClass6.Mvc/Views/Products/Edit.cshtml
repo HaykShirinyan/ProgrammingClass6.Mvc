@@ -1,80 +1,40 @@
-﻿@model Product
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model ProgrammingClass6.Mvc.Models.Product
 
-<form asp-controller="Products" asp-action="Edit">
-    <div class="mb-3">
-        <label asp-for="Id" class="form-label">
-            ID
-        </label>
-        <input asp-for="Id" class="form-control" readonly />
+<h2>Edit Product</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <label>Name</label>
+        <input asp-for="Name" class="form-control"/>
     </div>
-
-    <div class="mb-3">
-        <label asp-for="Name" class="form-label">
-            Name
-        </label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
+    <div class="form-group">
+        <label>Description</label>
+        <input asp-for="Description" class="form-control"/>
     </div>
-
-    <div class="mb-3">
-        <label asp-for="Description" class="form-label">
-            Description
-        </label>
-        <textarea asp-for="Description" class="form-control">
-        </textarea>
-        <span asp-validation-for="Description" class="text-danger"></span>
+    <div class="form-group">
+        <label>Price</label>
+        <input asp-for="UnitPrice" class="form-control"/>
     </div>
-
-    <div class="mb-3">
-        <label asp-for="UnitPrice" class="form-label">
-            Unit Price
-        </label>
-        <input asp-for="UnitPrice" class="form-control" />
-        <span asp-validation-for="UnitPrice" class="text-danger"></span>
+    <div class="form-group">
+        <label>Quantity</label>
+        <input asp-for="Quantity" class="form-control"/>
     </div>
-
-    <div class="mb-3">
-        <label asp-for="Quantity" class="form-label">
-            Quantity
-        </label>
-        <input asp-for="Quantity" class="form-control" />
-        <span asp-validation-for="Quantity" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="ManufacturerId" class="form-label">
-            Manufacturer
-        </label>
-        <select asp-for="ManufacturerId" class="form-control">
-            <option></option>
-
-            @foreach (Manufacturer manufacturer in ViewBag.Manufacturers)
-            {
-                <option value="@manufacturer.Id">
-                    @manufacturer.Name
-                </option>
-            }
+    <div class="form-group">
+        <label>Manufacturer</label>
+        <select asp-for="ManufacturerId" class="form-control"
+                asp-items="@(new SelectList(ViewBag.Manufacturers, "Id", "Name"))">
+            <option value="">-- Select Manufacturer --</option>
         </select>
     </div>
-
-    <div class="my-3">
-        <a asp-controller="ProductCategories" asp-action="Index" asp-route-productId="@Model.Id">
-            Categories
-        </a>
+    <div class="form-group">
+        <label>Categories</label><br />
+        @foreach(var c in ViewBag.Categories as List<ProgrammingClass6.Mvc.Models.Category>)
+        {
+            <input type="checkbox" name="selectedCategories" value="@c.Id"
+                   @(Model.ProductCategories.Any(pc => pc.CategoryId == c.Id) ? "checked" : "") /> @c.Name <br />
+        }
     </div>
-
-    <div>
-        <a class="btn btn-secondary" asp-controller="Products" asp-action="Index">
-            Cancel
-        </a>
-
-        <button type="submit" class="btn btn-primary">
-            Save
-        </button>
-    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
 </form>

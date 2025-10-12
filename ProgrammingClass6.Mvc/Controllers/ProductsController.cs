@@ -1,81 +1,133 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProgrammingClass6.Mvc.Data;
 using ProgrammingClass6.Mvc.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace ProgrammingClass6.Mvc.Controllers
 {
     public class ProductsController : Controller
     {
-        private ApplicationDbContext _dbContext;
+        private readonly ApplicationDbContext _dbContext;
 
         public ProductsController(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        [HttpGet]
+        // GET: Products
         public IActionResult Index()
         {
-            List<Product> products = _dbContext
-                .Products
-                .Include(product => product.Manufacturer)
+            var products = _dbContext.Products
+                .Include(p => p.Manufacturer)
+                .Include(p => p.ProductCategories)
+                    .ThenInclude(pc => pc.Category)
                 .ToList();
 
             return View(products);
         }
 
+        // GET: Products/Create
         [HttpGet]
         public IActionResult Create()
         {
             ViewBag.Manufacturers = _dbContext.Manufacturers.ToList();
+            ViewBag.Categories = _dbContext.Categories.ToList();
             return View();
         }
 
+        // POST: Products/Create
         [HttpPost]
-        public IActionResult Create(Product product)
+        public IActionResult Create(Product product, int[] selectedCategories)
         {
             if (ModelState.IsValid)
             {
                 _dbContext.Products.Add(product);
                 _dbContext.SaveChanges();
 
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.Manufacturers = _dbContext.Manufacturers.ToList();
-
-            return View();
-        }
-
-        // /products/edit/{id}
-        [HttpGet]
-        public IActionResult Edit(int id)
-        {
-            var product = _dbContext
-                .Products
-                .SingleOrDefault(dbProductRow => dbProductRow.Id == id);
-
-            ViewBag.Manufacturers = _dbContext.Manufacturers.ToList();
-
-            return View(product);
-        }
-
-        [HttpPost]
-        public IActionResult Edit(Product product)
-        {
-            if (ModelState.IsValid)
-            {
-                _dbContext.Products.Update(product);
+                foreach (var catId in selectedCategories)
+                {
+                    _dbContext.ProductCategories.Add(new ProductCategory
+                    {
+                        ProductId = product.Id,
+                        CategoryId = catId
+                    });
+                }
                 _dbContext.SaveChanges();
 
                 return RedirectToAction("Index");
             }
 
             ViewBag.Manufacturers = _dbContext.Manufacturers.ToList();
-
+            ViewBag.Categories = _dbContext.Categories.ToList();
             return View(product);
+        }
+
+        // GET: Products/Edit/5
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var product = _dbContext.Products
+                .Include(p => p.ProductCategories)
+                .SingleOrDefault(p => p.Id == id);
+
+            if (product == null) return NotFound();
+
+            ViewBag.Manufacturers = _dbContext.Manufacturers.ToList();
+            ViewBag.Categories = _dbContext.Categories.ToList();
+            return View(product);
+        }
+
+        // POST: Products/Edit/5
+        [HttpPost]
+        public IActionResult Edit(Product product, int[] selectedCategories)
+        {
+            if (ModelState.IsValid)
+            {
+                var existing = _dbContext.Products
+                    .Include(p => p.ProductCategories)
+                    .Single(p => p.Id == product.Id);
+
+                existing.Name = product.Name;
+                existing.Description = product.Description;
+                existing.UnitPrice = product.UnitPrice;
+                existing.Quantity = product.Quantity;
+                existing.ManufacturerId = product.ManufacturerId;
+
+                // Update categories
+                existing.ProductCategories.Clear();
+                foreach (var catId in selectedCategories)
+                {
+                    existing.ProductCategories.Add(new ProductCategory
+                    {
+                        ProductId = existing.Id,
+                        CategoryId = catId
+                    });
+                }
+
+                _dbContext.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.Manufacturers = _dbContext.Manufacturers.ToList();
+            ViewBag.Categories = _dbContext.Categories.ToList();
+            return View(product);
+        }
+
+        // POST: Products/Delete/5
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var product = _dbContext.Products
+                .Include(p => p.ProductCategories)
+                .SingleOrDefault(p => p.Id == id);
+
+            if (product != null)
+            {
+                _dbContext.Products.Remove(product);
+                _dbContext.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

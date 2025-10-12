@@ -8,19 +8,20 @@ namespace ProgrammingClass6.Mvc.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
-        [StringLength(100)]
-        public string Name { get; set; }
+        [Required, StringLength(100)]
+        public string Name { get; set; } = string.Empty;
 
         [StringLength(1500)]
-        public string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
 
+        [Column(TypeName = "decimal(18,2)")]
         public decimal UnitPrice { get; set; }
 
         public int Quantity { get; set; }
 
-        [ForeignKey(nameof(Manufacturer))]
         public int? ManufacturerId { get; set; }
-        public Manufacturer Manufacturer { get; set; }
+        public Manufacturer? Manufacturer { get; set; }
+
+        public ICollection<ProductCategory> ProductCategories { get; set; } = new List<ProductCategory>();
     }
 }

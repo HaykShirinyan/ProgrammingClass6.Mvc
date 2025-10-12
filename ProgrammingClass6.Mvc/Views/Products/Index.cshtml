@@ -1,75 +1,45 @@
-﻿@model List<Product>
+﻿@model IEnumerable<ProgrammingClass6.Mvc.Models.Product>
 
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+<h1>Product List</h1>
 
-<a class="btn btn-primary mb-3" asp-controller="Products" asp-action="Create">
-    Add New
-</a>
+<p>
+    <a asp-action="Create" class="btn btn-success">Add New Product</a>
+</p>
 
-<div>
-    <table class="table">
-        <thead>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Manufacturer</th>
+            <th>Categories</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var product in Model)
+        {
             <tr>
-                <th>
-                    ID
-                </th>
-                <th>
-                    Name
-                </th>
-                <th>
-                    Description
-                </th>
-                <th>
-                    Unit Price
-                </th>
-                <th>
-                    Quantity
-                </th>
-                <th>
-                    Manufacturer
-                </th>
-                <th>
-                    Actions
-                </th>
+                <td>@product.Name</td>
+                <td>@product.Description</td>
+                <td>@product.UnitPrice</td>
+                <td>@product.Quantity</td>
+                <td>@product.Manufacturer?.Name</td>
+                <td>
+                    @foreach(var pc in product.ProductCategories)
+                    {
+                        @pc.Category.Name <br />
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@product.Id" class="btn btn-sm btn-primary">Edit</a>
+                    <form asp-action="Delete" asp-route-id="@product.Id" method="post" style="display:inline">
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </td>
             </tr>
-        </thead>
-
-        <tbody>
-            @foreach (Product product in Model)
-            {
-                <tr>
-                    <td>
-                        @product.Id
-                    </td>
-                    <td>
-                        @product.Name
-                    </td>
-                    <td>
-                        @product.Description
-                    </td>
-                    <td>
-                        @product.UnitPrice
-                    </td>
-                    <td>
-                        @product.Quantity
-                    </td>
-                    <td>
-                        @product.Manufacturer?.Name
-                    </td>
-                    <td>
-                        <a class="btn btn-secondary" 
-                            asp-controller="Products" 
-                            asp-action="Edit" 
-                            asp-route-id="@product.Id">
-                            Edit
-                        </a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
+        }
+    </tbody>
+</table>
