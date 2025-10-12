@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ProgrammingClass6.Mvc.Data;
 using ProgrammingClass6.Mvc.Models;
+using System.Security.Claims;
 
 namespace ProgrammingClass6.Mvc.Controllers
 {
@@ -17,8 +18,6 @@ namespace ProgrammingClass6.Mvc.Controllers
         [HttpGet]
         public IActionResult Index(int productId)
         {
-            ViewBag.ProductId = productId;
-
             var productCategories = _dbCotnext
                 .ProductCategories
                 .Include(productCategory => productCategory.Category)
