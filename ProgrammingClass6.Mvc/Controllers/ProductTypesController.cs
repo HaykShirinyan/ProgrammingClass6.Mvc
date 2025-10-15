@@ -38,6 +38,7 @@ namespace ProgrammingClass6.Mvc.Controllers
                 _dbcontext.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.Manufacturers = _dbcontext.Manufacturers.ToList();
             return View(productType);
         }
         [HttpGet]
