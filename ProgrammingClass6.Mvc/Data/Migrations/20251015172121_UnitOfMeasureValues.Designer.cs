@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProgrammingClass6.Mvc.Data;
 
@@ -11,9 +12,11 @@ using ProgrammingClass6.Mvc.Data;
 namespace ProgrammingClass6.Mvc.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251015172121_UnitOfMeasureValues")]
+    partial class UnitOfMeasureValues
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -378,12 +381,7 @@ namespace ProgrammingClass6.Mvc.Data.Migrations
                     b.Property<decimal>("UnitOfMeasureValue")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("UnitOfMeasureValueId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UnitOfMeasureValueId");
 
                     b.ToTable("UnitOfMeasures");
                 });
@@ -496,15 +494,6 @@ namespace ProgrammingClass6.Mvc.Data.Migrations
                         .HasForeignKey("ManufacturerId");
 
                     b.Navigation("Manufacturer");
-                });
-
-            modelBuilder.Entity("ProgrammingClass6.Mvc.Models.UnitOfMeasure", b =>
-                {
-                    b.HasOne("ProgrammingClass6.Mvc.Models.UnitOfMeasureValu", "UnitOfMeasureValu")
-                        .WithMany()
-                        .HasForeignKey("UnitOfMeasureValueId");
-
-                    b.Navigation("UnitOfMeasureValu");
                 });
 #pragma warning restore 612, 618
         }

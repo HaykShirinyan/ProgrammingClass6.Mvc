@@ -35,6 +35,23 @@
         <input asp-for="Quantity" class="form-control" />
         <span asp-validation-for="Quantity" class="text-danger"></span>
     </div>
+    <div class="mb-3">
+        <label asp-for="UnitOfMeasureValueId" class="form-label">
+            UnitOfMeasureValu
+        </label>
+        <select asp-for="UnitOfMeasureValueId" class="form-control">
+            <option>
+ 
+            </option>
+            @foreach (var unitOfMeasureValue in ViewBag.UnitOfMeasureValues)
+            {
+                <option value="@unitOfMeasureValue.Id">
+                    @unitOfMeasureValue.Name
+                </option>
+            }
+                      
+        </select>
+    </div>
     <div>
         <a class="btn btn-secondary" asp-controller="UnitOfMeasures" asp-action="Index">
             Cancel

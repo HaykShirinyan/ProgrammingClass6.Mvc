@@ -22,13 +22,16 @@
                     Type
                 </th>
                 <th>
-                    UnitOfMeasureValu
+                    UnitOfMeasureValue
                 </th>
                 <th>
                     Price
                 </th>
                 <th>
                     Quantity
+                </th>
+                <th>
+                    UnitOfMeasureValu
                 </th>
                 <th>
                     Actions
@@ -57,6 +60,9 @@
                     </td>
                     <td>
                         @unitOfMeasure.Quantity
+                    </td>
+                    <td>
+                        @unitOfMeasure.UnitOfMeasureValu?.Name
                     </td>
                     <td>
                         <a class="btn btn-secondary" asp-controller="UnitOfMeasures" asp-action="Edit" asp-route-id="@unitOfMeasure.Id">
