@@ -1,0 +1,72 @@
+﻿@model List<ProductType>
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<a class="btn btn-primary mb-3" asp-controller="ProductTypes" asp-action="Create">
+    Add New
+</a>
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Brand
+                </th>
+                <th>
+                    Type
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var productType in Model)
+            {
+                <tr>
+                    <td>
+                        @productType.Id
+                    </td>
+                    <td>
+                        @productType.Name
+                    </td>
+                    <td>
+                        @productType.Brand
+                    </td>
+                    <td>
+                        @productType.Type
+                    </td>
+                    <td>
+                        @productType.Price
+                    </td>
+                    <td>
+                        @productType.Quantity
+                    </td>
+                    <td>
+                        <a class="btn btn-secondary"
+                        asp-controller="ProductTypes"
+                        asp-action="Edit"
+                        asp-route-id="@productType.Id">
+                            Edit
+                        </a>
+                </tr>
+            }    
+
+        </tbody>
+    </table>
+</div>

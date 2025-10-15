@@ -1,0 +1,54 @@
+﻿@model ProductType
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<form asp-controller="ProductTypes" asp-action="Edit">
+    <div class="mb-3">
+        <label asp-for="Id" class="form-label">
+            Id
+        </label>
+        <input asp-for="Id" class="form-control" readonly />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Name</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Brand" class="form-label">Brand</label>
+        <textarea asp-for="Brand" class="form-control"></textarea>
+        <span asp-validation-for="Brand" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Type" class="form-label">Type</label>
+        <input asp-for="Type" class="form-control" />
+        <span asp-validation-for="Type" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Price" class="form-label">Price</label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Quantity" class="form-label">Quantity</label>
+        <input asp-for="Quantity" class="form-control" />
+        <span asp-validation-for="Quantity" class="text-danger"></span>
+    </div>
+    <div>
+        <a class="btn btn-secondary" asp-controller="ProductTypes" asp-action="Index">
+            Cancel
+        </a>
+        <button class="btn btn-primary" type="submit">
+            Save
+        </button>
+    </div>
+
+</form>
