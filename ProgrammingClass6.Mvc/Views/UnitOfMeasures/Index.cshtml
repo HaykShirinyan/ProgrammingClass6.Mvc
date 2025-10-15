@@ -5,7 +5,9 @@
 *@
 @{
 }
-
+<a class="btn btn-primary mb-3" asp-controller="UnitOfMeasures" asp-action="Create">
+    Add New
+</a>
 <div>
     <table class="table">
         <thead>
@@ -27,6 +29,9 @@
                 </th>
                 <th>
                     Quantity
+                </th>
+                <th>
+                    Actions
                 </th>
             </tr>
         </thead>
@@ -52,6 +57,11 @@
                     </td>
                     <td>
                         @unitOfMeasure.Quantity
+                    </td>
+                    <td>
+                        <a class="btn btn-secondary" asp-controller="UnitOfMeasures" asp-action="Edit" asp-route-id="@unitOfMeasure.Id">
+                            Edit
+                        </a>
                     </td>
                 </tr>
             }
