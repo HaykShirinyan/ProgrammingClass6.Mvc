@@ -66,6 +66,11 @@
             Sizes
         </a>
     </div>
+    <div class="my-3">
+        <a asp-controller="ProductColors" asp-action="Index" asp-route-productId="@Model.Product.Id">
+            Colors
+        </a>
+    </div>
 
     <div class="my-3">
         <a asp-controller="ProductCategories" asp-action="Index" asp-route-productId="@Model.Product.Id">
