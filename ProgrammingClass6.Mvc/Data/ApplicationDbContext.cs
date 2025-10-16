@@ -21,6 +21,9 @@ namespace ProgrammingClass6.Mvc.Data
 
         public DbSet<UnitOfMeasureValu> UnitOfMeasureValues { get; set; }
 
+        public DbSet<Size> Sizes { get; set; }
+        public DbSet<ProductSize> ProductSizes { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -34,6 +37,9 @@ namespace ProgrammingClass6.Mvc.Data
             builder
                 .Entity<ProductCategory>()
                 .HasKey(productCategory => new { productCategory.ProductId, productCategory.CategoryId });
+            builder
+                .Entity<ProductSize>()
+                .HasKey(productSize => new { productSize.ProductId, productSize.SizeId });
         }
     }
 }

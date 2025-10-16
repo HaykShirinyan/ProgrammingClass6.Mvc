@@ -61,6 +61,11 @@
             }
         </select>
     </div>
+    <div class="my-3">
+        <a asp-controller="ProductSizes" asp-action="Index" asp-route-productId="@Model.Product.Id">
+            Sizes
+        </a>
+    </div>
 
     <div class="my-3">
         <a asp-controller="ProductCategories" asp-action="Index" asp-route-productId="@Model.Product.Id">

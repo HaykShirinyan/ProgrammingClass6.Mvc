@@ -1,0 +1,47 @@
+﻿@model List<ProductSize>
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div>
+    <div class="mb-3">
+        <a class="btn btn-primary" 
+        asp-controller="ProductSizes"
+        asp-action="Create" 
+        asp-route-productId="@ViewBag.ProductId">
+            Add Size
+        </a>
+    </div>
+     <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.Size.Name</td>
+                    <td>@product.Size.Description</td>
+                    <td>
+                        <form asp-controller="ProductSizes"
+                        asp-action="Delete" 
+                        asp-route-productId="@product.ProductId"
+                        asp-route-sizeId="@product.SizeId">
+                        <button type="submit" class="btn btn-danger">
+                            Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
