@@ -6,6 +6,10 @@
 @{
 }
 
+<a class=" btn btn-primary mb-3" asp-controller="ProductTypes" asp-action="Create">
+    Add New
+</a>
+
 <div>
     <table class="table">
         <thead>
@@ -24,6 +28,9 @@
                 </th>
                 <th>
                     IsActive
+                </th>
+                <th>
+                    Actions
                 </th>
             </tr>
         </thead>
@@ -45,6 +52,14 @@
                 </td>
                 <td>
                         @productType.IsActive
+               </td>
+               <td>
+                   <a class=" btn btn-secondary" 
+                   asp-controller="ProductTypes" 
+                   asp-action="Edit" 
+                   asp-route-id="@productType.Id">
+                   Edit
+               </a>
                </td>
 
             </tr>
