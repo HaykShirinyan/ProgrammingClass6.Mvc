@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProgrammingClass6.Mvc.Data;
 using ProgrammingClass6.Mvc.Models;
-using Microsoft.EntityFrameworkCore;
+using ProgrammingClass6.Mvc.ViewModels;
+
+
 
 namespace ProgrammingClass6.Mvc.Controllers
 {
@@ -25,20 +28,23 @@ namespace ProgrammingClass6.Mvc.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.UnitOfMeasureValues = _dbcontext.UnitOfMeasureValues.ToList();
-            return View();
+            var viewModel = new UnitOfMeasureViewModel();
+            {
+                viewModel.UnitOfMeasureValues = _dbcontext.UnitOfMeasureValues.ToList();
+            }
+            return View(viewModel);
         }
         [HttpPost]
-        public IActionResult Create(UnitOfMeasure unitOfMeasure)
+        public IActionResult Create (UnitOfMeasureViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                _dbcontext.UnitOfMeasures.Add(unitOfMeasure);
+                _dbcontext.UnitOfMeasures.Add(viewModel.UnitOfMeasure);
                 _dbcontext.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UnitOfMeasureValues = _dbcontext.UnitOfMeasureValues.ToList();
-            return View(unitOfMeasure);
+            viewModel.UnitOfMeasureValues = _dbcontext.UnitOfMeasureValues.ToList();
+            return View(viewModel);
         }
         [HttpGet]
         public IActionResult Edit(int id)
@@ -46,20 +52,25 @@ namespace ProgrammingClass6.Mvc.Controllers
             var unitOfMeasure = _dbcontext.UnitOfMeasures.
                 SingleOrDefault(uom => uom.Id == id);
 
-            ViewBag.UnitOfMeasureValues = _dbcontext.UnitOfMeasureValues.ToList();
-            return View(unitOfMeasure);
+            var viewModel = new UnitOfMeasureViewModel
+            {
+                UnitOfMeasure = unitOfMeasure,
+                UnitOfMeasureValues = _dbcontext.UnitOfMeasureValues.ToList()
+            };
+
+            return View(viewModel);
         }
         [HttpPost]
-        public IActionResult Edit(UnitOfMeasure unitOfMeasure)
+        public IActionResult Edit (UnitOfMeasureViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                _dbcontext.UnitOfMeasures.Update(unitOfMeasure);
+                _dbcontext.UnitOfMeasures.Update(viewModel.UnitOfMeasure);
                 _dbcontext.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UnitOfMeasureValues = _dbcontext.UnitOfMeasureValues.ToList();
-            return View(unitOfMeasure);
+            viewModel.UnitOfMeasureValues = _dbcontext.UnitOfMeasureValues.ToList();
+            return View(viewModel);
         }
     }
 }

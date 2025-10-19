@@ -27,6 +27,7 @@ namespace ProgrammingClass6.Mvc.Data
         public DbSet<Color> Colors { get; set; }
 
         public DbSet<ProductColor> ProductColors { get; set; }
+        public object UnitOfMeasureValus { get; internal set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
