@@ -1,4 +1,4 @@
-﻿@model ProductSize
+﻿@model ProductSizesViewModels
 
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -9,17 +9,17 @@
 <div>
     <form asp-controller="ProductSizes" asp-action="Create">
         <div class="mb-3">
-            <label asp-for="ProductId" class="form-label">
+            <label asp-for="ProductSize.ProductId" class="form-label">
                 Product
             </label>
-            <input asp-for="ProductId" class="form-control" readonly />
+            <input asp-for="ProductSize.ProductId" class="form-control" readonly />
         </div>
 
         <div class="mb-3">
-            <label asp-for="SizeId" class="form-label">
+            <label asp-for="ProductSize.SizeId" class="form-label">
                 Size
             </label>
-            <select asp-for="SizeId" class="form-control">
+            <select asp-for="ProductSize.SizeId" class="form-control">
                 <option>-- Please Select --</option>
 
                 @foreach (var size in ViewBag.Sizes as List<Size>)
@@ -33,7 +33,7 @@
 
         <div>
             <a class="btn btn-secondary"
-               asp-controller="ProductSizes" asp-action="Index" asp-route-productId="@Model.ProductId">
+               asp-controller="ProductSizes" asp-action="Index" asp-route-productId="@Model.ProductSize.ProductId">
                 Cancel
             </a>
 

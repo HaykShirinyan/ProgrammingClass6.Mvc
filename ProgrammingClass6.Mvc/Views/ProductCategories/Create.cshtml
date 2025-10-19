@@ -1,6 +1,6 @@
-﻿@model ProductCategory
+﻿@model ProductCategoriesViewModels
 
-@*
+@*  
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
@@ -9,24 +9,23 @@
 <div>
     <form asp-controller="ProductCategories" asp-action="Create">
         <div class="mb-3">
-            <label asp-for="ProductId" class="form-label">
+            <label asp-for="ProductCategory.ProductId" class="form-label">
                 Product
             </label>
-            <input asp-for="ProductId" class="form-control" readonly />
+            <input asp-for="ProductCategory.ProductId" class="form-control" readonly />
         </div>
 
         <div class="mb-3">
-            <label asp-for="CategoryId" class="form-label">
+            <label asp-for="ProductCategory.CategoryId" class="form-label">
                 Category
             </label>
-            <select asp-for="CategoryId" class="form-control">
+            <select asp-for="ProductCategory.CategoryId" class="form-control">
                 <option>-- Please Select --</option>
 
-                @foreach (var category in ViewBag.Categories as List<Category>)
-                {
-                    <option value="@category.Id">
-                        @category.Name
-                    </option>    
+                @foreach (ProductCategory category in Model.ProductCategories)
+                {   <option value="@category.CategoryId">
+                        @category.Category
+                    </option>   
                 }
             </select>
         </div>
@@ -35,7 +34,7 @@
             <a class="btn btn-secondary" 
                 asp-controller="ProductCategories" 
                 asp-action="Index"
-                asp-route-productId="@Model.ProductId">
+               asp-route-productId="@Model.Product.Id">
                 Cancel
             </a>
 

@@ -1,4 +1,4 @@
-﻿@model List<ProductSize>
+﻿@model ProductSizesViewModels
 
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -9,7 +9,7 @@
 <div>
     <div class="mb-3">
         <a class="btn btn-primary" 
-        asp-controller="ProductSizes" asp-action="Create" asp-route-ProductId="@ViewBag.ProductId">
+        asp-controller="ProductSizes" asp-action="Create" asp-route-ProductId="@Model.ProductSize.ProductId">
         Add Size
     </a>
     </div>
@@ -22,7 +22,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var product in Model)
+            @foreach (var product in Model.ProductSizes)
             {
                 <tr>
                     <td>

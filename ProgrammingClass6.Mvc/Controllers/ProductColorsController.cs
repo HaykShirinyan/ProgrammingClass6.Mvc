@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using ProgrammingClass6.Mvc.Data;
 using ProgrammingClass6.Mvc.Models;
 using ProgrammingClass6.Mvc.Data.Migrations;
+using ProgrammingClass6.Mvc.ViewModels;
 
 namespace ProgrammingClass6.Mvc.Controllers
 {
@@ -19,15 +20,23 @@ namespace ProgrammingClass6.Mvc.Controllers
         [HttpGet]
         public IActionResult Index(int productId)
         {
-            ViewBag.ProductId = productId;
-
-            var productColors = _dbContext
+            List<ProductColor> productColors = _dbContext
                 .ProductColors
                 .Include(productColor => productColor.Color)    
                 .Where(productColor => productColor.ProductId == productId)
                 .ToList();
 
-            return View(productColors);
+            var viewModel = new ProductColorsViewModels
+            {
+                ProductColor = new ProductColor
+                {
+                    ProductId = productId
+                },
+
+                ProductColors = productColors
+            };
+
+            return View(viewModel);
         }
 
         [HttpGet]
@@ -37,18 +46,21 @@ namespace ProgrammingClass6.Mvc.Controllers
 
             productColor.ProductId = productId;
 
-            ViewBag.Colors = _dbContext.Colors.ToList();
+            var viewModel = new ProductColorsViewModels
+            {                
+                ProductColors = _dbContext.ProductColors.ToList()
+            };
 
-            return View(productColor);
+            return View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult Create(ProductColor productColor)
+        public IActionResult Create(ProductColorsViewModels viewModel)
         {
-            _dbContext.ProductColors.Add(productColor);
+            _dbContext.ProductColors.Add(viewModel.ProductColor);
             _dbContext.SaveChanges();
 
-            return RedirectToAction("Index", new { productId = productColor.ProductId });
+            return RedirectToAction("Index", new { productId = viewModel.ProductColor.ProductId });
         }
 
         [HttpPost]

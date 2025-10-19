@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using ProgrammingClass6.Mvc.Data;
 using ProgrammingClass6.Mvc.Data.Migrations;
 using ProgrammingClass6.Mvc.Models;
+using ProgrammingClass6.Mvc.ViewModels;
 
 namespace ProgrammingClass6.Mvc.Controllers
 {
@@ -19,9 +20,7 @@ namespace ProgrammingClass6.Mvc.Controllers
         [HttpGet]
         public IActionResult Index(int productId)
         {
-            ViewBag.ProductId = productId;
-
-            var productSizes = _dbContext
+            List<ProductSize> productSizes = _dbContext
                 .ProductSizes
                 .Include(productSize => productSize.Size)
                 .Where(productSize => productSize.ProductId == productId)
@@ -36,9 +35,13 @@ namespace ProgrammingClass6.Mvc.Controllers
 
             productSize.ProductId = productId;
 
-            ViewBag.Sizes = _dbContext.Sizes.ToList();
-
-            return View(productSize);            
+            var viewModel = new ProductSizesViewModels
+            {
+                ProductSize = productSize,
+                ProductSizes = _dbContext.ProductSizes.ToList()
+            };
+            
+            return View(viewModel);            
         }
 
         [HttpPost]

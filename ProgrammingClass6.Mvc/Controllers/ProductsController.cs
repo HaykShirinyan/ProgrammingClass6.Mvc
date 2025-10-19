@@ -3,6 +3,7 @@ using ProgrammingClass6.Mvc.Data;
 using ProgrammingClass6.Mvc.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using ProgrammingClass6.Mvc.ViewModels;
 
 namespace ProgrammingClass6.Mvc.Controllers
 {
@@ -31,33 +32,34 @@ namespace ProgrammingClass6.Mvc.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Manufacturers = _dbContext.Manufacturers.ToList();
+            var viewModel = new ProductViewModel
+            {
+                Manufacturers = _dbContext.Manufacturers.ToList(),
+                UnitOfMeasures = _dbContext.UnitOfMeasures.ToList(),
+                //ProductTypes = _dbContext.ProductTypes.ToList(),
+            };  
 
-            ViewBag.UnitOfMeasures = _dbContext.UnitOfMeasures.ToList();
-
-            //ViewBag.ProductTypes = _dbContext.ProductTypes.ToList();
-
-            return View();
+            return View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult Create(Product product)
+        public IActionResult Create(ProductViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                _dbContext.Products.Add(product);
+                _dbContext.Products.Add(viewModel.Product);
                 _dbContext.SaveChanges();
 
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Manufacturers = _dbContext.Manufacturers.ToList();
+            viewModel.Manufacturers = _dbContext.Manufacturers.ToList();
 
-            ViewBag.UnitOfMeasures = _dbContext.UnitOfMeasures.ToList();
+            viewModel.UnitOfMeasures = _dbContext.UnitOfMeasures.ToList();
 
-            //ViewBag.ProductTypes = _dbContext.ProductTypes.ToList();
+            //viewModel.ProductTypes = _dbContext.ProductTypes.ToList();
 
-            return View();
+            return View(viewModel);
         }
 
         // /products/edit/{id}
@@ -68,33 +70,35 @@ namespace ProgrammingClass6.Mvc.Controllers
                 .Products
                 .SingleOrDefault(dbProductRow => dbProductRow.Id == id);
 
-            ViewBag.Manufacturers = _dbContext.Manufacturers.ToList();
+            var viewModel = new ProductViewModel
+            {
+                Product = product,
+                Manufacturers = _dbContext.Manufacturers.ToList(),
+                UnitOfMeasures = _dbContext.UnitOfMeasures.ToList(),
+                //ProductTypes = _dbContext.ProductTypes.ToList(),
+            };            
 
-            ViewBag.UnitOfMeasures =_dbContext.UnitOfMeasures.ToList();
-
-            //ViewBag.ProductTypes = _dbContext.ProductTypes.ToList();
-
-            return View(product);
+            return View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult Edit(Product product)
+        public IActionResult Edit(ProductViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                _dbContext.Products.Update(product);
+                _dbContext.Products.Update(viewModel.Product);
                 _dbContext.SaveChanges();
 
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Manufacturers = _dbContext.Manufacturers.ToList();
+            viewModel.Manufacturers = _dbContext.Manufacturers.ToList();
 
-            ViewBag.UnitOfMeasures = _dbContext.UnitOfMeasures.ToList();
+            viewModel.UnitOfMeasures = _dbContext.UnitOfMeasures.ToList();
 
-            //ViewBag.ProductTypes = _dbContext.ProductTypes.ToList();
+            //viewModel.ProductTypes = _dbContext.ProductTypes.ToList();
 
-            return View(product);
+            return View(viewModel);
         }
     }
 }
