@@ -2,64 +2,82 @@
 using Microsoft.EntityFrameworkCore;
 using ProgrammingClass6.Mvc.Data;
 using ProgrammingClass6.Mvc.Models;
+using ProgrammingClass6.Mvc.ViewModels;
 
 namespace ProgrammingClass6.Mvc.Controllers
 {
     public class ProductColorsController : Controller
     {
-        private ApplicationDbContext _dbCotnext;
+        private readonly ApplicationDbContext _dbContext;
 
-        public ProductColorsController(ApplicationDbContext dbCotnext)
+        public ProductColorsController(ApplicationDbContext dbContext)
         {
-            _dbCotnext = dbCotnext;
+            _dbContext = dbContext;
         }
 
         [HttpGet]
         public IActionResult Index(int productId)
         {
-            ViewBag.ProductId = productId;
-
-            var productColors = _dbCotnext
+            var productColors = _dbContext
                 .ProductColors
-                .Include(productColor => productColor.Color)
-                .Where(productColor => productColor.ProductId == productId)
+                .Include(pc => pc.Color)
+                .Where(pc => pc.ProductId == productId)
                 .ToList();
 
+            ViewBag.ProductId = productId;
             return View(productColors);
         }
 
         [HttpGet]
         public IActionResult Create(int productId)
         {
-            var productColor = new ProductColor();
+            var viewModel = new ProductColorViewModel
+            {
+                ProductColor = new ProductColor
+                {
+                    ProductId = productId
+                },
+                Colors = _dbContext.Colors.ToList()
+            };
 
-            productColor.ProductId = productId;
-
-            ViewBag.Colors = _dbCotnext.Colors.ToList();
-
-            return View(productColor);
+            return View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult Create(ProductColor productColor)
+        public IActionResult Create(ProductColorViewModel viewModel)
         {
-            _dbCotnext.ProductColors.Add(productColor);
-            _dbCotnext.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                var entity = new ProductColor
+                {
+                    ProductId = viewModel.ProductColor.ProductId,
+                    ColorId = viewModel.ProductColor.ColorId
+                };
 
-            return RedirectToAction("Index", new { productId = productColor.ProductId });
+                _dbContext.ProductColors.Add(entity);
+                _dbContext.SaveChanges();
+
+                return RedirectToAction("Index", new { productId = entity.ProductId });
+            }
+
+            // refill dropdown if validation fails
+            viewModel.Colors = _dbContext.Colors.ToList();
+            return View(viewModel);
         }
 
         [HttpPost]
         public IActionResult Delete(int productId, int colorId)
         {
-            var productColor = _dbCotnext
-                .ProductColors
-                .SingleOrDefault(productColor => productColor.ProductId == productId && productColor.ColorId == colorId);
+            var productColor = _dbContext.ProductColors
+                .SingleOrDefault(pc => pc.ProductId == productId && pc.ColorId == colorId);
 
-            _dbCotnext.Remove(productColor);
-            _dbCotnext.SaveChanges();
+            if (productColor != null)
+            {
+                _dbContext.ProductColors.Remove(productColor);
+                _dbContext.SaveChanges();
+            }
 
-            return RedirectToAction("Index", new { productId = productColor.ProductId });
+            return RedirectToAction("Index", new { productId });
         }
     }
 }

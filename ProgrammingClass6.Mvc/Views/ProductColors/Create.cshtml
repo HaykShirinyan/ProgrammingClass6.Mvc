@@ -1,32 +1,21 @@
-﻿@model ProductColor
-
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model ProductColorViewModel
 
 <div>
-    <form asp-controller="ProductColors" asp-action="Create">
+    <form asp-controller="ProductColors" asp-action="Create" method="post">
+        <input type="hidden" asp-for="ProductColor.ProductId" />
+
         <div class="mb-3">
-            <label asp-for="ProductId" class="form-label">
-                Product
-            </label>
-            <input asp-for="ProductId" class="form-control" readonly />
+            <label asp-for="ProductColor.ProductId" class="form-label">Product</label>
+            <input asp-for="ProductColor.ProductId" class="form-control" readonly />
         </div>
 
         <div class="mb-3">
-            <label asp-for="ColorId" class="form-label">
-                Color
-            </label>
-            <select asp-for="ColorId" class="form-control">
-                <option>-- Please Select --</option>
-
-                @foreach (var color in ViewBag.Colors as List<Color>)
+            <label asp-for="ProductColor.ColorId" class="form-label">Color</label>
+            <select asp-for="ProductColor.ColorId" class="form-control">
+                <option value="">-- Please Select --</option>
+                @foreach (var color in Model.Colors)
                 {
-                    <option value="@color.Id">
-                        @color.Name
-                    </option>
+                    <option value="@color.Id">@color.Name</option>
                 }
             </select>
         </div>
@@ -35,13 +24,11 @@
             <a class="btn btn-secondary"
                asp-controller="ProductColors"
                asp-action="Index"
-               asp-route-productId="@Model.ProductId">
+               asp-route-productId="@Model.ProductColor.ProductId">
                 Cancel
             </a>
 
-            <button type="submit" class="btn btn-primary">
-                Save
-            </button>
+            <button type="submit" class="btn btn-primary">Save</button>
         </div>
     </form>
 </div>

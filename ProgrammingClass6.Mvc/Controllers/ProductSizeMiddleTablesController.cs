@@ -2,27 +2,26 @@
 using Microsoft.EntityFrameworkCore;
 using ProgrammingClass6.Mvc.Data;
 using ProgrammingClass6.Mvc.Models;
+using ProgrammingClass6.Mvc.ViewModels;
 
 namespace ProgrammingClass6.Mvc.Controllers
 {
     public class ProductSizeMiddleTablesController : Controller
     {
-        private ApplicationDbContext _dbCotnext;
+        private readonly ApplicationDbContext _dbContext;
 
-        public ProductSizeMiddleTablesController(ApplicationDbContext dbCotnext)
+        public ProductSizeMiddleTablesController(ApplicationDbContext dbContext)
         {
-            _dbCotnext = dbCotnext;
+            _dbContext = dbContext;
         }
 
         [HttpGet]
         public IActionResult Index(int productId)
         {
-            ViewBag.ProductId = productId;
-
-            var productSizes = _dbCotnext
+            var productSizes = _dbContext
                 .ProductSizeMiddleTables
-                .Include(productSize => productSize.ProductSize)
-                .Where(productSize => productSize.ProductId == productId)
+                .Include(ps => ps.ProductSize)
+                .Where(ps => ps.ProductId == productId)
                 .ToList();
 
             return View(productSizes);
@@ -31,35 +30,53 @@ namespace ProgrammingClass6.Mvc.Controllers
         [HttpGet]
         public IActionResult Create(int productId)
         {
-            var productSize = new ProductSizeMiddleTable();
+            var viewModel = new ProductSizeMiddleTableViewModel
+            {
+                ProductSizeMiddleTable = new ProductSizeMiddleTable
+                {
+                    ProductId = productId
+                },
+                ProductSizes = _dbContext.ProductSizes.ToList()
+            };
 
-            productSize.ProductId = productId;
-
-            ViewBag.ProductSizes = _dbCotnext.ProductSizes.ToList();
-
-            return View(productSize);
+            return View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult Create(ProductSizeMiddleTable productSizeMiddleTable)
+        public IActionResult Create(ProductSizeMiddleTableViewModel viewModel)
         {
-            _dbCotnext.ProductSizeMiddleTables.Add(productSizeMiddleTable);
-            _dbCotnext.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                var middle = new ProductSizeMiddleTable
+                {
+                    ProductId = viewModel.ProductSizeMiddleTable.ProductId,
+                    ProductSizeId = viewModel.ProductSizeMiddleTable.ProductSizeId
+                };
 
-            return RedirectToAction("Index", new { productId = productSizeMiddleTable.ProductId });
+                _dbContext.ProductSizeMiddleTables.Add(middle);
+                _dbContext.SaveChanges();
+
+                return RedirectToAction("Index", new { productId = middle.ProductId });
+            }
+
+            viewModel.ProductSizes = _dbContext.ProductSizes.ToList();
+            return View(viewModel);
         }
+
 
         [HttpPost]
         public IActionResult Delete(int productId, int productSizeId)
         {
-            var productSize = _dbCotnext
-                .ProductSizeMiddleTables
-                .SingleOrDefault(productSize => productSize.ProductId == productId && productSize.ProductSizeId == productSizeId);
+            var productSize = _dbContext.ProductSizeMiddleTables
+                .SingleOrDefault(ps => ps.ProductId == productId && ps.ProductSizeId == productSizeId);
 
-            _dbCotnext.Remove(productSize);
-            _dbCotnext.SaveChanges();
+            if (productSize != null)
+            {
+                _dbContext.ProductSizeMiddleTables.Remove(productSize);
+                _dbContext.SaveChanges();
+            }
 
-            return RedirectToAction("Index", new { productId = productSize.ProductId });
+            return RedirectToAction("Index", new { productId });
         }
     }
 }

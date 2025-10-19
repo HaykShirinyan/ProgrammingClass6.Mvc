@@ -1,18 +1,19 @@
-﻿@model ProductSizeMiddleTable
+﻿@model ProgrammingClass6.Mvc.ViewModels.ProductSizeMiddleTableViewModel
 
 <div>
-    <form asp-controller="ProductSizeMiddleTables" asp-action="Create">
+    <form asp-controller="ProductSizeMiddleTables" asp-action="Create" method="post">
+        <input type="hidden" asp-for="ProductSizeMiddleTable.ProductId" />
+
         <div class="mb-3">
-            <label asp-for="ProductId" class="form-label">Product</label>
-            <input asp-for="ProductId" class="form-control" readonly />
+            <label asp-for="ProductSizeMiddleTable.ProductId" class="form-label">Product</label>
+            <input asp-for="ProductSizeMiddleTable.ProductId" class="form-control" readonly />
         </div>
 
         <div class="mb-3">
-            <label asp-for="ProductSizeId" class="form-label">Product Size</label>
-            <select asp-for="ProductSizeId" class="form-control">
-                <option>-- Please Select --</option>
-
-                @foreach (var productSize in ViewBag.ProductSizes as List<ProductSize>)
+            <label asp-for="ProductSizeMiddleTable.ProductSizeId" class="form-label">Product Size</label>
+            <select asp-for="ProductSizeMiddleTable.ProductSizeId" class="form-control">
+                <option value="">-- Please Select --</option>
+                @foreach (var productSize in Model.ProductSizes)
                 {
                     <option value="@productSize.Id">@productSize.Name</option>
                 }
@@ -23,7 +24,7 @@
             <a class="btn btn-secondary"
                asp-controller="ProductSizeMiddleTables"
                asp-action="Index"
-               asp-route-productId="@Model.ProductId">
+               asp-route-productId="@Model.ProductSizeMiddleTable.ProductId">
                 Cancel
             </a>
 
