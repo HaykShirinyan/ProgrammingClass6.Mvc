@@ -2,10 +2,10 @@
 
 namespace ProgrammingClass6.Mvc.ViewModels
 {
-    public class ProductTypeViewModel
+               
+    public class ProductTypeItemViewModel
     {
         public ProductType ProductType { get; set; }
-        public List<Manufacturer> Manufacturers { get; set; }
-
+        public List<ProductType> ProductTypes { get; set; }
     }
 }

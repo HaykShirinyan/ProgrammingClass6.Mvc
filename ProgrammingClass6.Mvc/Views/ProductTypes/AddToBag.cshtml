@@ -1,0 +1,75 @@
+﻿@model ProductTypeItemViewModel
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+
+<h1 class="h3">
+    Add Product to Bag
+</h1>
+
+<form asp-controller="ProductTypes" asp-action="AddToBag">
+    <div class="mb-3">
+        <label asp-for="ProductType.Id" class="form-label">Id</label>
+        <input asp-for="ProductType.Id" class="form-control" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ProductType.Name" class="form-label">Name</label>
+        <input asp-for="ProductType.Name" class="form-control" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ProductType.Price" class="form-label">Price</label>
+        <input asp-for="ProductType.Price" class="form-control" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ProductType.Quantity" class="form-label">Quantity</label>
+        <input asp-for="ProductType.Quantity" class="form-control" />
+    </div>
+
+    <div>
+        <label asp-for="ProductType.Type" class="form-label">Total Price</label>
+        <input asp-for="ProductType.Type" class="form-control" readonly />
+    </div>
+
+    <div class="mt-3">
+        <a class="btn btn-secondary" asp-controller="ProductTypes" asp-action="Index">Cancel</a>
+        <button class="btn btn-primary" type="submit">AddToBag</button>
+    </div>
+
+    @if (Model.ProductTypes != null && Model.ProductTypes.Any())
+    {
+        <table class="table mt-4">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Brand</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var productType in Model.ProductTypes)
+            {
+                <tr>
+                    <td>@productType.Name</td>
+                    <td>@productType.Brand</td>
+                    <td>@productType.Price</td>
+                    <td>@productType.Quantity</td>
+                    <td>
+                        <a class="btn btn-primary" asp-controller="ProductTypes" asp-action="AddTobag" asp-route-id="@productType.Id">
+                            Check Out
+                        </a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+</form>

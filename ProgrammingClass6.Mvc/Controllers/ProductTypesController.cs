@@ -9,7 +9,7 @@ namespace ProgrammingClass6.Mvc.Controllers
     public class ProductTypesController : Controller
     {
         private readonly ApplicationDbContext _dbcontext;
-            public ProductTypesController(ApplicationDbContext dbcontext)
+        public ProductTypesController(ApplicationDbContext dbcontext)
         {
             _dbcontext = dbcontext;
         }
@@ -18,18 +18,18 @@ namespace ProgrammingClass6.Mvc.Controllers
         {
             List<ProductType> productTypes = _dbcontext
                 .ProductTypes
-                .Include(pt=> pt.Manufacturer)
+                .Include(pt => pt.Manufacturer)
                 .ToList();
 
             return View(productTypes);
-          
+
         }
         [HttpGet]
         public IActionResult Create()
         {
             var viewModel = new ProductTypeViewModel();
             {
-              viewModel.Manufacturers = _dbcontext.Manufacturers.ToList();
+                viewModel.Manufacturers = _dbcontext.Manufacturers.ToList();
             }
             return View(viewModel);
         }
@@ -57,7 +57,7 @@ namespace ProgrammingClass6.Mvc.Controllers
                 Manufacturers = _dbcontext.Manufacturers.ToList()
             };
 
-        
+
             return View(viewModel);
         }
         [HttpPost]
@@ -73,5 +73,66 @@ namespace ProgrammingClass6.Mvc.Controllers
             viewModel.Manufacturers = _dbcontext.Manufacturers.ToList();
             return View(viewModel);
         }
+        [HttpGet]
+        public IActionResult AddToBag(int id)
+        {
+            var productType = _dbcontext.ProductTypes
+                .Include(pt => pt.Manufacturer)
+                .SingleOrDefault(pt => pt.Id == id);
+
+            if (productType == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new ProductTypeItemViewModel
+            {
+                ProductType = productType
+            };
+
+            return View(viewModel);
+        }
+        [HttpPost]
+        public IActionResult AddToBag(ProductTypeItemViewModel viewModel)
+        {
+         
+            if (ModelState.IsValid)
+            {
+                var productTypeCart = new ProductTypeCart
+                {
+                    Name = viewModel.ProductType.Name,
+                    Brand = viewModel.ProductType.Brand,
+                    Type = viewModel.ProductType.Type,
+                    Price = viewModel.ProductType.Price,
+                    TotalPrice = viewModel.ProductType.Price
+                };
+
+                _dbcontext.ProductTypeCarts.Add(productTypeCart);
+                _dbcontext.SaveChanges();
+                return RedirectToAction("Index", "ProductTypeCarts");
+            }
+            viewModel.ProductType = _dbcontext.ProductTypes
+                .Include(pt => pt.Manufacturer)
+                .SingleOrDefault(pt => pt.Id == viewModel.ProductType.Id);
+
+            return View(viewModel);
+
+        }
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            var productType = _dbcontext.ProductTypes
+                .SingleOrDefault(pt => pt.Id == id);
+            if (productType != null)
+            {
+                _dbcontext.ProductTypes.Remove(productType);
+                _dbcontext.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
+        }
+
+
     }
-}
+
+} 
