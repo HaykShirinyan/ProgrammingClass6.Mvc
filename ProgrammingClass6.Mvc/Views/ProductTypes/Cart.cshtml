@@ -1,4 +1,4 @@
-﻿@model ProductTypeItemViewModel
+﻿@model List<ProductTypeCart>
 
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -8,44 +8,42 @@
 <h1 class="h3">
     Shopping Cart
 </h1>
+
 <form asp-controller="ProductTypes" asp-action="Cart">
-    <div class="mb-3">
-        <label asp-for="ProductType.Name" class="form-label">Id</label>
-        <input asp-for="ProductType.Name" class="form-control" readonly/>
-        <span asp-validation-for="ProductType.Name" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="ProductType.Quantity" class="form-label">Quantity</label>
-        <input asp-for="ProductType.Quantity" class="form-control" />
-        <span asp-validation-for="ProductType.Quantity" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="ProductType.Price" class="form-label">Price</label>
-        <input asp-for="ProductType.Price" class="form-control" />
-        <span asp-validation-for="ProductType.Price" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="ProductType.Brand" class="form-label">Total Price</label>
-        <input asp-for="ProductType.Brand" class="form-control" readonly />
-        <span asp-validation-for="ProductType.Brand" class="text-danger"></span>
-    </div>
-    @foreach (var productType in Model.ProductTypes)
+    @foreach (var productTypeCart in Model)
     {
-        <div class="mb-3">
-            <label class="form-label">Item Name</label>
-            <input class="form-control" value="@productType.Name" readonly />
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Quantity</label>
-            <input class="form-control" value="@productType.Brand" readonly />
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Price</label>
-            <input class="form-control" value="@productType.Price" readonly />
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Total Price</label>
-            <input class="form-control" value="@productType.Quantity" readonly />
+        <div class="card mb-4 shadow-sm p-3">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="mb-0">@productTypeCart.Name</h5>
+                <form asp-controller="ProductTypes"
+                      asp-action="Remove"
+                      asp-route-id="@productTypeCart.Id"
+                      method="get">
+                    <button type="submit" class="btn btn-danger btn-sm">
+                        Remove
+                    </button>
+                </form>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input class="form-control" value="@productTypeCart.Name" readonly />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Brand</label>
+                <input class="form-control" value="@productTypeCart.Brand" readonly />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Type</label>
+                <input class="form-control" value="@productTypeCart.Type" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Price</label>
+                <input class="form-control" value="@productTypeCart.Price" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Total Price</label>
+                <input class="form-control" value="@productTypeCart.TotalPrice" readonly />
+            </div>
         </div>
     }
     <div>
@@ -56,5 +54,4 @@
             Checkout
         </button>
     </div>
-
 </form>

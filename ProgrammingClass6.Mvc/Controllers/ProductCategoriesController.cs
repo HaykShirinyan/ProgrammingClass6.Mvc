@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ProgrammingClass6.Mvc.Data;
 using ProgrammingClass6.Mvc.Models;
 using System.Security.Claims;
+using ProgrammingClass6.Mvc.ViewModels;
 
 namespace ProgrammingClass6.Mvc.Controllers
 {
@@ -18,13 +19,17 @@ namespace ProgrammingClass6.Mvc.Controllers
         [HttpGet]
         public IActionResult Index(int productId)
         {
-            var productCategories = _dbCotnext
-                .ProductCategories
-                .Include(productCategory => productCategory.Category)
-                .Where(productCategory => productCategory.ProductId == productId)
-                .ToList();
+            var ViewModel = new ProductCategoryViewModel
+            {
+                ProductCategory = new ProductCategory { ProductId = productId },
+                Categories = _dbCotnext.Categories.ToList(),
+                ProductCategories = _dbCotnext.ProductCategories
+                .Include(pc => pc.Category)
+                .Where(pc => pc.ProductId == productId)
+                .ToList()
+            };
 
-            return View(productCategories);
+            return View(ViewModel);
         }
 
         [HttpGet]
@@ -34,18 +39,22 @@ namespace ProgrammingClass6.Mvc.Controllers
 
             productCategory.ProductId = productId;
 
-            ViewBag.Categories = _dbCotnext.Categories.ToList();
+            var viewModel = new ProductCategoryViewModel
+            {
+                ProductCategory = productCategory,
+                Categories = _dbCotnext.Categories.ToList()
+            };
 
-            return View(productCategory);
+            return View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult Create(ProductCategory productCategory)
+        public IActionResult Create(ProductCategoryViewModel viewModel)
         {
-            _dbCotnext.ProductCategories.Add(productCategory);
+            _dbCotnext.ProductCategories.Add(viewModel.ProductCategory);
             _dbCotnext.SaveChanges();
 
-            return RedirectToAction("Index", new { productId = productCategory.ProductId });
+            return RedirectToAction("Index", new { productId = viewModel.ProductCategory.ProductId });
         }
 
         [HttpPost]

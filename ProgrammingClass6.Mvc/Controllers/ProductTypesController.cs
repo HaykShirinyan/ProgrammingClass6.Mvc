@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ProgrammingClass6.Mvc.Data;
 using ProgrammingClass6.Mvc.Models;
 using ProgrammingClass6.Mvc.ViewModels;
+using System.Security.Claims;
 
 namespace ProgrammingClass6.Mvc.Controllers
 {
@@ -87,7 +88,14 @@ namespace ProgrammingClass6.Mvc.Controllers
 
             var viewModel = new ProductTypeItemViewModel
             {
-                ProductType = productType
+                ProductTypeCart =  new ProductTypeCart
+                {
+                    Name = productType.Name,
+                    Brand = productType.Brand,
+                    Type = productType.Type,
+                    Price = productType.Price
+                }
+
             };
 
             return View(viewModel);
@@ -100,36 +108,58 @@ namespace ProgrammingClass6.Mvc.Controllers
             {
                 var productTypeCart = new ProductTypeCart
                 {
-                    Name = viewModel.ProductType.Name,
-                    Brand = viewModel.ProductType.Brand,
-                    Type = viewModel.ProductType.Type,
-                    Price = viewModel.ProductType.Price,
-                    TotalPrice = viewModel.ProductType.Price
+                    Name = viewModel.ProductTypeCart.Name,
+                    Brand = viewModel.ProductTypeCart.Brand,
+                    Type = viewModel.ProductTypeCart.Type,
+                    Price = viewModel.ProductTypeCart.Price,
+                    TotalPrice = viewModel.ProductTypeCart.Price
                 };
 
                 _dbcontext.ProductTypeCarts.Add(productTypeCart);
                 _dbcontext.SaveChanges();
                 return RedirectToAction("Index", "ProductTypeCarts");
             }
-            viewModel.ProductType = _dbcontext.ProductTypes
-                .Include(pt => pt.Manufacturer)
-                .SingleOrDefault(pt => pt.Id == viewModel.ProductType.Id);
+            viewModel.ProductTypeCart = _dbcontext.ProductTypeCarts
+                .Include(pt => pt.Id)
+                .SingleOrDefault(pt => pt.Id == viewModel.ProductTypeCart.Id);
 
             return View(viewModel);
 
         }
-        [HttpPost]
+        [HttpGet]
         public IActionResult Delete(int id)
         {
             var productType = _dbcontext.ProductTypes
                 .SingleOrDefault(pt => pt.Id == id);
+            if (productType == null)
+            {
+                return NotFound();
+            }
+            return View(productType);
+        }
+        [HttpGet]
+        public IActionResult Cart()
+        {
+            var cartItems = _dbcontext.ProductTypeCarts.ToList();
+            return View(cartItems);
+        }
+
+        [HttpGet]
+        public IActionResult Remove(int id)
+        {
+            var productType = _dbcontext.ProductTypeCarts.SingleOrDefault(pt => pt.Id == id);
             if (productType != null)
             {
-                _dbcontext.ProductTypes.Remove(productType);
+                _dbcontext.ProductTypeCarts.Remove(productType);
                 _dbcontext.SaveChanges();
             }
+            return RedirectToAction("Cart");
+        }
 
-            return RedirectToAction("Index");
+        public IActionResult AnotherAction()
+        {
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            return View();
         }
 
 

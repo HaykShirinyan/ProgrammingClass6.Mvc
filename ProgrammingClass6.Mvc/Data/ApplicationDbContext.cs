@@ -29,6 +29,7 @@ namespace ProgrammingClass6.Mvc.Data
         public DbSet<ProductColor> ProductColors { get; set; }
 
         public DbSet<ProductTypeCart> ProductTypeCarts { get; set; }
+        public DbSet<TotalPriceToProductTypeCart> TotalPriceToProductTypeCarts { get; set; }
         public object UnitOfMeasureValus { get; internal set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)

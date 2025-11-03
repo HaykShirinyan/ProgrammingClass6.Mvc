@@ -12,7 +12,8 @@ namespace ProgrammingClass6.Mvc.Models
         public string Brand { get; set; }
         public string Type { get; set; }
         public decimal Price { get; set; }
-        public decimal TotalPrice { get; set; }       
+        public decimal TotalPrice { get; set; }
+    
     }
 
 }

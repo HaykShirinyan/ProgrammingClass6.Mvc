@@ -12,63 +12,79 @@
     Add Product to Bag
 </h1>
 
+    <a class="btn btn-info mb-3" asp-controller="ProductTypes" asp-action="Cart">
+        View Bag
+    </a>
+
+
 <form asp-controller="ProductTypes" asp-action="AddToBag">
     <div class="mb-3">
-        <label asp-for="ProductType.Id" class="form-label">Id</label>
-        <input asp-for="ProductType.Id" class="form-control" readonly />
+        <label asp-for="ProductTypeCart.Id" class="form-label">Id</label>
+        <input asp-for="ProductTypeCart.Id" class="form-control" readonly />
     </div>
 
     <div class="mb-3">
-        <label asp-for="ProductType.Name" class="form-label">Name</label>
-        <input asp-for="ProductType.Name" class="form-control" readonly />
+        <label asp-for="ProductTypeCart.Name" class="form-label">Name</label>
+        <input asp-for="ProductTypeCart.Name" class="form-control" readonly />
+    </div>
+    <div class="mb-3">
+        <label asp-for="ProductTypeCart.Brand" class="form-label">Brand</label>
+        <input asp-for="ProductTypeCart.Brand" class="form-control" readonly />
     </div>
 
     <div class="mb-3">
-        <label asp-for="ProductType.Price" class="form-label">Price</label>
-        <input asp-for="ProductType.Price" class="form-control" readonly />
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="ProductType.Quantity" class="form-label">Quantity</label>
-        <input asp-for="ProductType.Quantity" class="form-control" />
+        <label asp-for="ProductTypeCart.Type" class="form-label">Type</label>
+        <input asp-for="ProductTypeCart.Type" class="form-control" />
     </div>
 
     <div>
-        <label asp-for="ProductType.Type" class="form-label">Total Price</label>
-        <input asp-for="ProductType.Type" class="form-control" readonly />
+        <label asp-for="ProductTypeCart.Price" class="form-label"> Price</label>
+        <input asp-for="ProductTypeCart.Price" class="form-control" readonly />
+    </div>
+    <div>
+        <label asp-for="ProductTypeCart.TotalPrice" class="form-label">Total Price</label>
+        <input asp-for="ProductTypeCart.TotalPrice" class="form-control" />
     </div>
 
     <div class="mt-3">
         <a class="btn btn-secondary" asp-controller="ProductTypes" asp-action="Index">Cancel</a>
-        <button class="btn btn-primary" type="submit">AddToBag</button>
+        <button class="btn btn-primary" type="submit">
+            AddToBag
+        </button>
     </div>
 
-    @if (Model.ProductTypes != null && Model.ProductTypes.Any())
+    @if (Model.ProductTypeCarts != null && Model.ProductTypeCarts.Count > 0)
     {
         <table class="table mt-4">
             <thead>
                 <tr>
+                    <th>Id</th>
                     <th>Name</th>
                     <th>Brand</th>
                     <th>Price</th>
-                    <th>Quantity</th>
+                    <th>Type</th>
+                    <th>Total Price</th>
                 </tr>
             </thead>
             <tbody>
-            @foreach (var productType in Model.ProductTypes)
+                @foreach (var productTypeCart in Model.ProductTypeCarts)
             {
                 <tr>
-                    <td>@productType.Name</td>
-                    <td>@productType.Brand</td>
-                    <td>@productType.Price</td>
-                    <td>@productType.Quantity</td>
+                    <td>@productTypeCart.Id</td>
+                    <td>@productTypeCart.Name</td>
+                    <td>@productTypeCart.Brand</td>
+                    <td>@productTypeCart.Price</td>
+                    <td>@productTypeCart.Type</td>
+                    <td>@productTypeCart.TotalPrice</td>
                     <td>
-                        <a class="btn btn-primary" asp-controller="ProductTypes" asp-action="AddTobag" asp-route-id="@productType.Id">
+                        <a class="btn btn-primary" asp-controller="ProductTypes" asp-action="AddTobag" asp-route-id="@productTypeCart.Id">
                             Check Out
                         </a>
+                        
                     </td>
                 </tr>
             }
+
             </tbody>
         </table>
     }

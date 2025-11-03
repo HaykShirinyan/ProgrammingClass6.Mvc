@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ProgrammingClass6.Mvc.Data;
 using Microsoft.EntityFrameworkCore;
+using ProgrammingClass6.Mvc.Data;
+using ProgrammingClass6.Mvc.Data.Migrations;
 using ProgrammingClass6.Mvc.Models;
+using ProgrammingClass6.Mvc.ViewModels;
 
 namespace ProgrammingClass6.Mvc.Controllers
 {
@@ -14,34 +16,42 @@ namespace ProgrammingClass6.Mvc.Controllers
         }
         public IActionResult Index(int productId)
         {
-            ViewBag.ProductId = productId;
-            var productColors = _dbContext
-                .ProductColors
-                .Include(pc => pc.Color)
-                .Where(pc => pc.ProductId == productId)
-                .ToList();
+            var ViewModel = new ProductColorViewModel
+            {
+                 
+               ProductColor = new ProductColor { ProductId = productId },
+               Colors = _dbContext.Colors.ToList(),
+               ProductColors = _dbContext.ProductColors
+               .Include(pc => pc.Color)
+               .Where(pc => pc.ProductId == productId)
+               .ToList()
+            };
 
-            return View(productColors);
+            return View(ViewModel);
         }
         [HttpGet]
         public IActionResult Create(int productId)
         {
             var productColor = new ProductColor();
             productColor.ProductId = productId;
-            ViewBag.Colors = _dbContext.Colors.ToList();
-            return View(productColor);
+            var viewModel= new ProductColorViewModel
+            {
+                ProductColor = productColor,
+                Colors = _dbContext.Colors.ToList()
+            };
+            return View(viewModel);
         }
         [HttpPost]
-        public IActionResult Create(ProductColor productColor)
+        public IActionResult Create(ProductColorViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                _dbContext.ProductColors.Add(productColor);
+                _dbContext.ProductColors.Add(viewModel.ProductColor);
                 _dbContext.SaveChanges();
-                return RedirectToAction("Index", new { productId = productColor.ProductId });
+                return RedirectToAction("Index", new { productId = viewModel.ProductColor.ProductId });
             }
-            ViewBag.Colors = _dbContext.Colors.ToList();
-            return View(productColor);
+            viewModel.Colors = _dbContext.Colors.ToList();
+            return View(viewModel);
         }
         [HttpPost]
         public IActionResult Delete(int productId, int colorId)
@@ -54,7 +64,7 @@ namespace ProgrammingClass6.Mvc.Controllers
                 _dbContext.ProductColors.Remove(productColor);
                 _dbContext.SaveChanges();
             }
-            return RedirectToAction("Index", new { productId = productId });
+            return RedirectToAction("Index", new { productId });
         }
 
     }

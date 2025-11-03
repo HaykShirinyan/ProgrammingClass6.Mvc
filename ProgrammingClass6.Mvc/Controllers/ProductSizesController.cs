@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ProgrammingClass6.Mvc.Data;
 using ProgrammingClass6.Mvc.Models;
+using ProgrammingClass6.Mvc.ViewModels;
 
 namespace ProgrammingClass6.Mvc.Controllers
 {
@@ -16,13 +17,16 @@ namespace ProgrammingClass6.Mvc.Controllers
         [HttpGet]
         public IActionResult Index(int productId)
         {
-            ViewBag.ProductId = productId;
-            var productSizes = _dbContext
-                .ProductSizes
+            var ViewModel= new ProductSizeViewModel
+            {
+                ProductSize = new ProductSize { ProductId = productId },
+                Sizes = _dbContext.Sizes.ToList(),
+                ProductSizes = _dbContext.ProductSizes
                 .Include(ps => ps.Size)
                 .Where(ps => ps.ProductId == productId)
-                .ToList();
-            return View(productSizes);
+                .ToList()
+            };
+            return View(ViewModel);
         }
         [HttpGet]
         public IActionResult Create(int productId)
@@ -30,21 +34,25 @@ namespace ProgrammingClass6.Mvc.Controllers
             var productSize = new ProductSize();
 
             productSize.ProductId = productId;
-            ViewBag.Sizes = _dbContext.Sizes.ToList();
+            var viewModel = new ProductSizeViewModel
+            {
+                ProductSize = productSize,
+                Sizes = _dbContext.Sizes.ToList()
+            };
 
-            return View(productSize);
+            return View(viewModel);
         }
         [HttpPost]
-        public IActionResult Create(ProductSize productSize)
+        public IActionResult Create(ProductSizeViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                _dbContext.ProductSizes.Add(productSize);
+                _dbContext.ProductSizes.Add(viewModel.ProductSize);
                 _dbContext.SaveChanges();
-                return RedirectToAction("Index", new { productId = productSize.ProductId });
+                return RedirectToAction("Index", new { productId = viewModel.ProductSize.ProductId });
             }
-            ViewBag.Sizes = _dbContext.Sizes.ToList();
-            return View(productSize);
+            viewModel.Sizes = _dbContext.Sizes.ToList();
+            return View(viewModel);
         }
         [HttpPost]
         public IActionResult Delete(int productId, int SizeId) 
@@ -57,7 +65,7 @@ namespace ProgrammingClass6.Mvc.Controllers
                 _dbContext.ProductSizes.Remove(productSize);
                 _dbContext.SaveChanges();
             }
-            return RedirectToAction("Index", new { productId = productId });
+            return RedirectToAction("Index", new { productId });
 
 
         }

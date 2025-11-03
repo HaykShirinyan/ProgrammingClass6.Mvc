@@ -1,4 +1,4 @@
-﻿@model ProductColor
+﻿@model ProductColorViewModel
 
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -9,19 +9,19 @@
 <div>
     <form asp-controller="ProductColors" asp-action="Create">
         <div class="mb-3">
-            <label asp-for="ProductId" class="form-label">
+            <label asp-for="ProductColor.ProductId" class="form-label">
                 Product
             </label>
-            <input asp-for="ProductId" class="form-control" readonly />
+            <input asp-for="ProductColor.ProductId" class="form-control" readonly />
         </div>
         <div class="mb-3">
-            <label asp-for="ColorId" class="form-label">
+            <label asp-for="ProductColor.ColorId" class="form-label">
                 Color
             </label>
-            <select asp-for="ColorId" class="form-control">
+            <select asp-for="ProductColor.ColorId" class="form-control">
                 <option></option>
 
-                @foreach (var color in ViewBag.Colors as List<Color>)
+                @foreach (var color in Model.Colors as List<Color>)
                 {
                     <option value="@color.Id">
                         @color.Name
@@ -33,7 +33,7 @@
             <a class="btn btn-secondary"
                asp-controller="ProductColors"
                asp-action="Index"
-               asp-route-productId="@Model.ProductId">
+               asp-route-productId="@Model.ProductColor.ProductId">
                 Cancel
             </a>
             <button type="submit" class="btn btn-primary">
