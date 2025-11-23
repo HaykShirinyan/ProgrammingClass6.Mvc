@@ -1,0 +1,55 @@
+@model List<EcomWebsite.Models.Products>
+
+<h1>Listings</h1>
+
+<div>
+    <a class="btn btn-primary mb-3" asp-controller="Admin" asp-action="Create">
+        Add New
+    </a>
+
+    <a class="btn btn-primary mb-3" asp-controller="Admin" asp-action="Users">
+        Users
+    </a>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>View</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Id</td>
+                <td><img src="@product.Image" alt="@product.Name" style="height:60px;" /></td>
+                <td>@product.Name</td>
+                <td>@product.Description</td>
+                <td>@product.Price</td>
+                <td>
+                    <a class="btn btn-primary" href="/Product/@product.Id">
+                        View
+                    </a>
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-controller="Admin" asp-action="Edit" asp-route-id="@product.Id">
+                        Edit
+                    </a>
+                </td>
+                <td>
+                    <a class="btn btn-danger" href="/Admin/Delete/@product.Id">
+                        Remove
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
